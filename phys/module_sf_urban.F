@@ -779,6 +779,11 @@ use module_wrf_error
    if(alhoption==1) ALH = ALH*alhdiuprf(tloc2)*alhseason(Kalh)
 
    IF( ZDC+Z0C+2. >= ZA) THEN
+    write(mesg,*) 'ZA:', ZA
+    CALL wrf_message(mesg)
+    write(mesg,*) 'ZDC:', ZDC
+    CALL wrf_message(mesg)
+    write(mesg,*) 'Z0C:', Z0C
     FATAL_ERROR("ZDC + Z0C + 2m is larger than the 1st WRF level - Stop in subroutine urban - change ZDC and Z0C" ) 
    END IF
 
@@ -2420,11 +2425,12 @@ ENDIF
 !===========================================================================
    SUBROUTINE urban_var_init(ISURBAN, TSURFACE0_URB,TLAYER0_URB,TDEEP0_URB,IVGTYP,  & ! in
                              ims,ime,jms,jme,kms,kme,num_soil_layers,         & ! in
-!                             num_roof_layers,num_wall_layers,num_road_layers, & ! in
-!                              num_roof_layers,num_wall_layers,num_road_layers, & !urban
-                             LOW_DENSITY_RESIDENTIAL,                    &
-		             HIGH_DENSITY_RESIDENTIAL,                   &
-		             HIGH_INTENSITY_INDUSTRIAL,                    &
+!                            num_roof_layers,num_wall_layers,num_road_layers, & ! in
+!                            num_roof_layers,num_wall_layers,num_road_layers, & !urban
+                             URBAN_ZONE_1, URBAN_ZONE_2, URBAN_ZONE_3,     &
+                             URBAN_ZONE_4, URBAN_ZONE_5, URBAN_ZONE_6,     &
+                             URBAN_ZONE_7, URBAN_ZONE_8, URBAN_ZONE_9,     &
+                             URBAN_ZONE_10,                                &
                              restart,sf_urban_physics,                     & !in
                              XXXR_URB2D,XXXB_URB2D,XXXG_URB2D,XXXC_URB2D,  & ! inout
                              TR_URB2D,TB_URB2D,TG_URB2D,TC_URB2D,QC_URB2D, & ! inout
@@ -2464,7 +2470,8 @@ ENDIF
    IMPLICIT NONE
 
    INTEGER, INTENT(IN) :: ISURBAN, sf_urban_physics
-   INTEGER, INTENT(IN) :: LOW_DENSITY_RESIDENTIAL, HIGH_DENSITY_RESIDENTIAL, HIGH_INTENSITY_INDUSTRIAL
+   INTEGER, INTENT(IN) :: URBAN_ZONE_1, URBAN_ZONE_2, URBAN_ZONE_3, URBAN_ZONE_4, URBAN_ZONE_5
+   INTEGER, INTENT(IN) :: URBAN_ZONE_6, URBAN_ZONE_7, URBAN_ZONE_8, URBAN_ZONE_9, URBAN_ZONE_10
    INTEGER, INTENT(IN) :: ims,ime,jms,jme,kms,kme,num_soil_layers
    INTEGER, INTENT(IN) :: num_urban_ndm
    INTEGER, INTENT(IN) :: urban_map_zrd
@@ -2592,8 +2599,8 @@ ENDIF
       SWITCH_URB=0
 
             IF( IVGTYP(I,J) == ISURBAN)  THEN
-               UTYPE_URB2D(I,J) = 2  ! for default. high-intensity
-               UTYPE_URB = UTYPE_URB2D(I,J)  ! for default. high-intensity
+               UTYPE_URB2D(I,J) = 6  ! DEFAULT VALUE
+               UTYPE_URB = UTYPE_URB2D(I,J)
                IF (HGT_URB2D(I,J)>0.) THEN
                   CONTINUE
                ELSE
@@ -2614,21 +2621,21 @@ ENDIF
                      ENDDO
                   ENDIF
                ENDIF
-                IF (FRC_URB2D(I,J)>0.and.FRC_URB2D(I,J)<=1.) THEN
-                  CONTINUE
-                ELSE
-                  WRITE(mesg,*) 'WARNING, FRC_URB2D = 0 BUT IVGTYP IS URBAN'
-                  WRITE_MESSAGE(mesg)
-                  WRITE(mesg,*) 'WARNING, THE URBAN FRACTION WILL BE READ FROM URBPARM.TBL'
-                  WRITE_MESSAGE(mesg)
-                  FRC_URB2D(I,J) = FRC_URB_TBL(UTYPE_URB)
-                ENDIF           
+               IF (FRC_URB2D(I,J)>0.and.FRC_URB2D(I,J)<=1.) THEN
+                 CONTINUE
+               ELSE
+                 WRITE(mesg,*) 'WARNING, FRC_URB2D = 0 BUT IVGTYP IS URBAN'
+                 WRITE_MESSAGE(mesg)
+                 WRITE(mesg,*) 'WARNING, THE URBAN FRACTION WILL BE READ FROM URBPARM.TBL'
+                 WRITE_MESSAGE(mesg)
+                 FRC_URB2D(I,J) = FRC_URB_TBL(UTYPE_URB)
+               ENDIF           
                SWITCH_URB=1
             ENDIF 
 
-            IF( IVGTYP(I,J) == LOW_DENSITY_RESIDENTIAL) THEN
-               UTYPE_URB2D(I,J) = 1  ! low-intensity residential
-               UTYPE_URB = UTYPE_URB2D(I,J)  ! low-intensity residential
+            IF( IVGTYP(I,J) == URBAN_ZONE_1) THEN
+               UTYPE_URB2D(I,J) = 1
+               UTYPE_URB = UTYPE_URB2D(I,J)
                IF (HGT_URB2D(I,J)>0.) THEN
                   CONTINUE
                ELSE
@@ -2661,10 +2668,10 @@ ENDIF
               SWITCH_URB=1
             ENDIF
 
-           IF( IVGTYP(I,J) == HIGH_DENSITY_RESIDENTIAL) THEN
-               UTYPE_URB2D(I,J) = 2  ! high-intensity
-               UTYPE_URB = UTYPE_URB2D(I,J)  ! high-intensity
-              IF (HGT_URB2D(I,J)>0.) THEN
+            IF( IVGTYP(I,J) == URBAN_ZONE_2) THEN
+               UTYPE_URB2D(I,J) = 2
+               UTYPE_URB = UTYPE_URB2D(I,J)
+               IF (HGT_URB2D(I,J)>0.) THEN
                   CONTINUE
                ELSE
                   WRITE(mesg,*) 'USING DEFAULT URBAN MORPHOLOGY'
@@ -2692,14 +2699,14 @@ ENDIF
                   WRITE(mesg,*) 'WARNING, THE URBAN FRACTION WILL BE READ FROM URBPARM.TBL'
                   WRITE_MESSAGE(mesg)
                   FRC_URB2D(I,J) = FRC_URB_TBL(UTYPE_URB)
-                ENDIF
+                ENDIF         
               SWITCH_URB=1
             ENDIF
 
-            IF( IVGTYP(I,J) == HIGH_INTENSITY_INDUSTRIAL) THEN
-               UTYPE_URB2D(I,J) = 3  !  Commercial/Industrial/Transportation
-               UTYPE_URB = UTYPE_URB2D(I,J)  !  Commercial/Industrial/Transportation
-              IF (HGT_URB2D(I,J)>0.) THEN
+            IF( IVGTYP(I,J) == URBAN_ZONE_3) THEN
+               UTYPE_URB2D(I,J) = 3
+               UTYPE_URB = UTYPE_URB2D(I,J)
+               IF (HGT_URB2D(I,J)>0.) THEN
                   CONTINUE
                ELSE
                   WRITE(mesg,*) 'USING DEFAULT URBAN MORPHOLOGY'
@@ -2727,8 +2734,288 @@ ENDIF
                   WRITE(mesg,*) 'WARNING, THE URBAN FRACTION WILL BE READ FROM URBPARM.TBL'
                   WRITE_MESSAGE(mesg)
                   FRC_URB2D(I,J) = FRC_URB_TBL(UTYPE_URB)
-                ENDIF
-               SWITCH_URB=1
+                ENDIF         
+              SWITCH_URB=1
+            ENDIF
+            
+            IF( IVGTYP(I,J) == URBAN_ZONE_4) THEN
+               UTYPE_URB2D(I,J) = 4
+               UTYPE_URB = UTYPE_URB2D(I,J)
+               IF (HGT_URB2D(I,J)>0.) THEN
+                  CONTINUE
+               ELSE
+                  WRITE(mesg,*) 'USING DEFAULT URBAN MORPHOLOGY'
+                  WRITE_MESSAGE(mesg)
+                  LP_URB2D(I,J)=0.
+                  LB_URB2D(I,J)=0.
+                  HGT_URB2D(I,J)=0.
+                  IF ( sf_urban_physics == 1 ) THEN
+                     MH_URB2D(I,J)=0.
+                     STDH_URB2D(I,J)=0.
+                     DO K=1,4
+                       LF_URB2D(I,K,J)=0.
+                     ENDDO
+                  ELSE IF ( ( sf_urban_physics == 2 ) .or. ( sf_urban_physics == 3 ) ) THEN
+                     DO K=1,num_urban_hi
+                        HI_URB2D(I,K,J)=0.
+                     ENDDO
+                  ENDIF
+               ENDIF
+                IF (FRC_URB2D(I,J)>0.and.FRC_URB2D(I,J)<=1.) THEN
+                  CONTINUE
+                ELSE
+                  WRITE(mesg,*) 'WARNING, FRC_URB2D = 0 BUT IVGTYP IS URBAN'
+                  WRITE_MESSAGE(mesg)
+                  WRITE(mesg,*) 'WARNING, THE URBAN FRACTION WILL BE READ FROM URBPARM.TBL'
+                  WRITE_MESSAGE(mesg)
+                  FRC_URB2D(I,J) = FRC_URB_TBL(UTYPE_URB)
+                ENDIF         
+              SWITCH_URB=1
+            ENDIF
+            
+            IF( IVGTYP(I,J) == URBAN_ZONE_4) THEN
+               UTYPE_URB2D(I,J) = 4
+               UTYPE_URB = UTYPE_URB2D(I,J)
+               IF (HGT_URB2D(I,J)>0.) THEN
+                  CONTINUE
+               ELSE
+                  WRITE(mesg,*) 'USING DEFAULT URBAN MORPHOLOGY'
+                  WRITE_MESSAGE(mesg)
+                  LP_URB2D(I,J)=0.
+                  LB_URB2D(I,J)=0.
+                  HGT_URB2D(I,J)=0.
+                  IF ( sf_urban_physics == 1 ) THEN
+                     MH_URB2D(I,J)=0.
+                     STDH_URB2D(I,J)=0.
+                     DO K=1,4
+                       LF_URB2D(I,K,J)=0.
+                     ENDDO
+                  ELSE IF ( ( sf_urban_physics == 2 ) .or. ( sf_urban_physics == 3 ) ) THEN
+                     DO K=1,num_urban_hi
+                        HI_URB2D(I,K,J)=0.
+                     ENDDO
+                  ENDIF
+               ENDIF
+                IF (FRC_URB2D(I,J)>0.and.FRC_URB2D(I,J)<=1.) THEN
+                  CONTINUE
+                ELSE
+                  WRITE(mesg,*) 'WARNING, FRC_URB2D = 0 BUT IVGTYP IS URBAN'
+                  WRITE_MESSAGE(mesg)
+                  WRITE(mesg,*) 'WARNING, THE URBAN FRACTION WILL BE READ FROM URBPARM.TBL'
+                  WRITE_MESSAGE(mesg)
+                  FRC_URB2D(I,J) = FRC_URB_TBL(UTYPE_URB)
+                ENDIF         
+              SWITCH_URB=1
+            ENDIF
+            
+            IF( IVGTYP(I,J) == URBAN_ZONE_5) THEN
+               UTYPE_URB2D(I,J) = 5
+               UTYPE_URB = UTYPE_URB2D(I,J)
+               IF (HGT_URB2D(I,J)>0.) THEN
+                  CONTINUE
+               ELSE
+                  WRITE(mesg,*) 'USING DEFAULT URBAN MORPHOLOGY'
+                  WRITE_MESSAGE(mesg)
+                  LP_URB2D(I,J)=0.
+                  LB_URB2D(I,J)=0.
+                  HGT_URB2D(I,J)=0.
+                  IF ( sf_urban_physics == 1 ) THEN
+                     MH_URB2D(I,J)=0.
+                     STDH_URB2D(I,J)=0.
+                     DO K=1,4
+                       LF_URB2D(I,K,J)=0.
+                     ENDDO
+                  ELSE IF ( ( sf_urban_physics == 2 ) .or. ( sf_urban_physics == 3 ) ) THEN
+                     DO K=1,num_urban_hi
+                        HI_URB2D(I,K,J)=0.
+                     ENDDO
+                  ENDIF
+               ENDIF
+                IF (FRC_URB2D(I,J)>0.and.FRC_URB2D(I,J)<=1.) THEN
+                  CONTINUE
+                ELSE
+                  WRITE(mesg,*) 'WARNING, FRC_URB2D = 0 BUT IVGTYP IS URBAN'
+                  WRITE_MESSAGE(mesg)
+                  WRITE(mesg,*) 'WARNING, THE URBAN FRACTION WILL BE READ FROM URBPARM.TBL'
+                  WRITE_MESSAGE(mesg)
+                  FRC_URB2D(I,J) = FRC_URB_TBL(UTYPE_URB)
+                ENDIF         
+              SWITCH_URB=1
+            ENDIF
+            
+            IF( IVGTYP(I,J) == URBAN_ZONE_6) THEN
+               UTYPE_URB2D(I,J) = 6
+               UTYPE_URB = UTYPE_URB2D(I,J)
+               IF (HGT_URB2D(I,J)>0.) THEN
+                  CONTINUE
+               ELSE
+                  WRITE(mesg,*) 'USING DEFAULT URBAN MORPHOLOGY'
+                  WRITE_MESSAGE(mesg)
+                  LP_URB2D(I,J)=0.
+                  LB_URB2D(I,J)=0.
+                  HGT_URB2D(I,J)=0.
+                  IF ( sf_urban_physics == 1 ) THEN
+                     MH_URB2D(I,J)=0.
+                     STDH_URB2D(I,J)=0.
+                     DO K=1,4
+                       LF_URB2D(I,K,J)=0.
+                     ENDDO
+                  ELSE IF ( ( sf_urban_physics == 2 ) .or. ( sf_urban_physics == 3 ) ) THEN
+                     DO K=1,num_urban_hi
+                        HI_URB2D(I,K,J)=0.
+                     ENDDO
+                  ENDIF
+               ENDIF
+                IF (FRC_URB2D(I,J)>0.and.FRC_URB2D(I,J)<=1.) THEN
+                  CONTINUE
+                ELSE
+                  WRITE(mesg,*) 'WARNING, FRC_URB2D = 0 BUT IVGTYP IS URBAN'
+                  WRITE_MESSAGE(mesg)
+                  WRITE(mesg,*) 'WARNING, THE URBAN FRACTION WILL BE READ FROM URBPARM.TBL'
+                  WRITE_MESSAGE(mesg)
+                  FRC_URB2D(I,J) = FRC_URB_TBL(UTYPE_URB)
+                ENDIF         
+              SWITCH_URB=1
+            ENDIF
+            
+            IF( IVGTYP(I,J) == URBAN_ZONE_7) THEN
+               UTYPE_URB2D(I,J) = 7
+               UTYPE_URB = UTYPE_URB2D(I,J)
+               IF (HGT_URB2D(I,J)>0.) THEN
+                  CONTINUE
+               ELSE
+                  WRITE(mesg,*) 'USING DEFAULT URBAN MORPHOLOGY'
+                  WRITE_MESSAGE(mesg)
+                  LP_URB2D(I,J)=0.
+                  LB_URB2D(I,J)=0.
+                  HGT_URB2D(I,J)=0.
+                  IF ( sf_urban_physics == 1 ) THEN
+                     MH_URB2D(I,J)=0.
+                     STDH_URB2D(I,J)=0.
+                     DO K=1,4
+                       LF_URB2D(I,K,J)=0.
+                     ENDDO
+                  ELSE IF ( ( sf_urban_physics == 2 ) .or. ( sf_urban_physics == 3 ) ) THEN
+                     DO K=1,num_urban_hi
+                        HI_URB2D(I,K,J)=0.
+                     ENDDO
+                  ENDIF
+               ENDIF
+                IF (FRC_URB2D(I,J)>0.and.FRC_URB2D(I,J)<=1.) THEN
+                  CONTINUE
+                ELSE
+                  WRITE(mesg,*) 'WARNING, FRC_URB2D = 0 BUT IVGTYP IS URBAN'
+                  WRITE_MESSAGE(mesg)
+                  WRITE(mesg,*) 'WARNING, THE URBAN FRACTION WILL BE READ FROM URBPARM.TBL'
+                  WRITE_MESSAGE(mesg)
+                  FRC_URB2D(I,J) = FRC_URB_TBL(UTYPE_URB)
+                ENDIF         
+              SWITCH_URB=1
+            ENDIF
+
+            IF( IVGTYP(I,J) == URBAN_ZONE_8) THEN
+               UTYPE_URB2D(I,J) = 8
+               UTYPE_URB = UTYPE_URB2D(I,J)
+               IF (HGT_URB2D(I,J)>0.) THEN
+                  CONTINUE
+               ELSE
+                  WRITE(mesg,*) 'USING DEFAULT URBAN MORPHOLOGY'
+                  WRITE_MESSAGE(mesg)
+                  LP_URB2D(I,J)=0.
+                  LB_URB2D(I,J)=0.
+                  HGT_URB2D(I,J)=0.
+                  IF ( sf_urban_physics == 1 ) THEN
+                     MH_URB2D(I,J)=0.
+                     STDH_URB2D(I,J)=0.
+                     DO K=1,4
+                       LF_URB2D(I,K,J)=0.
+                     ENDDO
+                  ELSE IF ( ( sf_urban_physics == 2 ) .or. ( sf_urban_physics == 3 ) ) THEN
+                     DO K=1,num_urban_hi
+                        HI_URB2D(I,K,J)=0.
+                     ENDDO
+                  ENDIF
+               ENDIF
+                IF (FRC_URB2D(I,J)>0.and.FRC_URB2D(I,J)<=1.) THEN
+                  CONTINUE
+                ELSE
+                  WRITE(mesg,*) 'WARNING, FRC_URB2D = 0 BUT IVGTYP IS URBAN'
+                  WRITE_MESSAGE(mesg)
+                  WRITE(mesg,*) 'WARNING, THE URBAN FRACTION WILL BE READ FROM URBPARM.TBL'
+                  WRITE_MESSAGE(mesg)
+                  FRC_URB2D(I,J) = FRC_URB_TBL(UTYPE_URB)
+                ENDIF         
+              SWITCH_URB=1
+            ENDIF
+
+            IF( IVGTYP(I,J) == URBAN_ZONE_9) THEN
+               UTYPE_URB2D(I,J) = 9
+               UTYPE_URB = UTYPE_URB2D(I,J)
+               IF (HGT_URB2D(I,J)>0.) THEN
+                  CONTINUE
+               ELSE
+                  WRITE(mesg,*) 'USING DEFAULT URBAN MORPHOLOGY'
+                  WRITE_MESSAGE(mesg)
+                  LP_URB2D(I,J)=0.
+                  LB_URB2D(I,J)=0.
+                  HGT_URB2D(I,J)=0.
+                  IF ( sf_urban_physics == 1 ) THEN
+                     MH_URB2D(I,J)=0.
+                     STDH_URB2D(I,J)=0.
+                     DO K=1,4
+                       LF_URB2D(I,K,J)=0.
+                     ENDDO
+                  ELSE IF ( ( sf_urban_physics == 2 ) .or. ( sf_urban_physics == 3 ) ) THEN
+                     DO K=1,num_urban_hi
+                        HI_URB2D(I,K,J)=0.
+                     ENDDO
+                  ENDIF
+               ENDIF
+                IF (FRC_URB2D(I,J)>0.and.FRC_URB2D(I,J)<=1.) THEN
+                  CONTINUE
+                ELSE
+                  WRITE(mesg,*) 'WARNING, FRC_URB2D = 0 BUT IVGTYP IS URBAN'
+                  WRITE_MESSAGE(mesg)
+                  WRITE(mesg,*) 'WARNING, THE URBAN FRACTION WILL BE READ FROM URBPARM.TBL'
+                  WRITE_MESSAGE(mesg)
+                  FRC_URB2D(I,J) = FRC_URB_TBL(UTYPE_URB)
+                ENDIF         
+              SWITCH_URB=1
+            ENDIF
+            
+            IF( IVGTYP(I,J) == URBAN_ZONE_10) THEN
+               UTYPE_URB2D(I,J) = 10
+               UTYPE_URB = UTYPE_URB2D(I,J)
+               IF (HGT_URB2D(I,J)>0.) THEN
+                  CONTINUE
+               ELSE
+                  WRITE(mesg,*) 'USING DEFAULT URBAN MORPHOLOGY'
+                  WRITE_MESSAGE(mesg)
+                  LP_URB2D(I,J)=0.
+                  LB_URB2D(I,J)=0.
+                  HGT_URB2D(I,J)=0.
+                  IF ( sf_urban_physics == 1 ) THEN
+                     MH_URB2D(I,J)=0.
+                     STDH_URB2D(I,J)=0.
+                     DO K=1,4
+                       LF_URB2D(I,K,J)=0.
+                     ENDDO
+                  ELSE IF ( ( sf_urban_physics == 2 ) .or. ( sf_urban_physics == 3 ) ) THEN
+                     DO K=1,num_urban_hi
+                        HI_URB2D(I,K,J)=0.
+                     ENDDO
+                  ENDIF
+               ENDIF
+                IF (FRC_URB2D(I,J)>0.and.FRC_URB2D(I,J)<=1.) THEN
+                  CONTINUE
+                ELSE
+                  WRITE(mesg,*) 'WARNING, FRC_URB2D = 0 BUT IVGTYP IS URBAN'
+                  WRITE_MESSAGE(mesg)
+                  WRITE(mesg,*) 'WARNING, THE URBAN FRACTION WILL BE READ FROM URBPARM.TBL'
+                  WRITE_MESSAGE(mesg)
+                  FRC_URB2D(I,J) = FRC_URB_TBL(UTYPE_URB)
+                ENDIF         
+              SWITCH_URB=1
             ENDIF
 
             IF (SWITCH_URB==1) THEN
@@ -2897,6 +3184,7 @@ ENDIF
 
       IF (CHECK.EQ.0)THEN
       IF(IVGTYP(I,J) .GT. 30)THEN
+      ! IF(IVGTYP(I,J).EQ.URBAN_ZONE_6)THEN
         write(mesg,*) 'Sample of Urban settings'
         call wrf_message(mesg)
         write(mesg,*) 'TSURFACE0_URB',TSURFACE0_URB(I,J)

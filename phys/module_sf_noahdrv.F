@@ -10,7 +10,8 @@ MODULE module_sf_noahdrv
       &                         SALP_DATA, REFDK_DATA, REFKDT_DATA, FRZK_DATA, ZBOT_DATA, CZIL_DATA,        &
       &                         SMLOW_DATA, SMHIGH_DATA, LVCOEF_DATA, NSLOPE, &
       &                         FRH2O,ZTOPVTBL,ZBOTVTBL, &
-      &                         LOW_DENSITY_RESIDENTIAL, HIGH_DENSITY_RESIDENTIAL, HIGH_INTENSITY_INDUSTRIAL
+      &                         URBAN_ZONE_1, URBAN_ZONE_2, URBAN_ZONE_3, URBAN_ZONE_4, URBAN_ZONE_5, &
+      &                         URBAN_ZONE_6, URBAN_ZONE_7, URBAN_ZONE_8, URBAN_ZONE_9, URBAN_ZONE_10
 
   USE module_sf_urban,    only: urban, oasis, IRI_SCHEME
   USE module_sf_noahlsm_glacial_only, only: sflx_glacial
@@ -927,8 +928,12 @@ CONTAINS
 ! the "NATURAL" category in the VEGPARM.TBL
 	
 	   IF(SF_URBAN_PHYSICS == 1.OR. SF_URBAN_PHYSICS==2.OR.SF_URBAN_PHYSICS==3 ) THEN
-                IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == LOW_DENSITY_RESIDENTIAL .or. &
-                  IVGTYP(I,J) == HIGH_DENSITY_RESIDENTIAL .or. IVGTYP(I,J) == HIGH_INTENSITY_INDUSTRIAL) THEN
+                IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == URBAN_ZONE_1 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_2 .or. IVGTYP(I,J) == URBAN_ZONE_3 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_4 .or. IVGTYP(I,J) == URBAN_ZONE_5 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_6 .or. IVGTYP(I,J) == URBAN_ZONE_7 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_8 .or. IVGTYP(I,J) == URBAN_ZONE_9 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_10 ) THEN
 		 VEGTYP = NATURAL
                  SHDFAC = SHDTBL(NATURAL)
                  ALBEDOK =0.2         !  0.2
@@ -945,8 +950,10 @@ CONTAINS
                  ENDIF
                 ENDIF
            ELSE
-                 IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == LOW_DENSITY_RESIDENTIAL .or. &
-                  IVGTYP(I,J) == HIGH_DENSITY_RESIDENTIAL .or. IVGTYP(I,J) == HIGH_INTENSITY_INDUSTRIAL) THEN
+                IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == URBAN_ZONE_1 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_2 .or. IVGTYP(I,J) == URBAN_ZONE_3 .or. IVGTYP(I,J) == URBAN_ZONE_4 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_5 .or. IVGTYP(I,J) == URBAN_ZONE_6 .or. IVGTYP(I,J) == URBAN_ZONE_7 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_8 .or. IVGTYP(I,J) == URBAN_ZONE_9 .or. IVGTYP(I,J) == URBAN_ZONE_10 ) THEN
                   VEGTYP = ISURBAN
            	 ENDIF
            ENDIF
@@ -962,8 +969,10 @@ CONTAINS
            if (tloc.lt.0) tloc=tloc+24
            if (tloc==0) tloc=24
            CALL cal_mon_day(julian,julyr,jmonth,jday) 
-           IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == LOW_DENSITY_RESIDENTIAL .or. &
-                IVGTYP(I,J) == HIGH_DENSITY_RESIDENTIAL .or. IVGTYP(I,J) == HIGH_INTENSITY_INDUSTRIAL) THEN
+           IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == URBAN_ZONE_1 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_2 .or. IVGTYP(I,J) == URBAN_ZONE_3 .or. IVGTYP(I,J) == URBAN_ZONE_4 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_5 .or. IVGTYP(I,J) == URBAN_ZONE_6 .or. IVGTYP(I,J) == URBAN_ZONE_7 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_8 .or. IVGTYP(I,J) == URBAN_ZONE_9 .or. IVGTYP(I,J) == URBAN_ZONE_10 ) THEN
             AOASIS = oasis  ! urban oasis effect
                    IF (IRIOPTION ==1) THEN
                    IF (tloc==21 .or. tloc==22) THEN  !irrigation on vegetaion in urban area, MAY-SEP, 9-10pm
@@ -1262,8 +1271,10 @@ CONTAINS
 ! Input variables lsm --> urban
 
 
-          IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == LOW_DENSITY_RESIDENTIAL .or. &
-              IVGTYP(I,J) == HIGH_DENSITY_RESIDENTIAL .or. IVGTYP(I,J) == HIGH_INTENSITY_INDUSTRIAL ) THEN
+          IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == URBAN_ZONE_1 .or. &
+              IVGTYP(I,J) == URBAN_ZONE_2 .or. IVGTYP(I,J) == URBAN_ZONE_3 .or. IVGTYP(I,J) == URBAN_ZONE_4 .or. &
+              IVGTYP(I,J) == URBAN_ZONE_5 .or. IVGTYP(I,J) == URBAN_ZONE_6 .or. IVGTYP(I,J) == URBAN_ZONE_7 .or. &
+              IVGTYP(I,J) == URBAN_ZONE_8 .or. IVGTYP(I,J) == URBAN_ZONE_9 .or. IVGTYP(I,J) == URBAN_ZONE_10 ) THEN
 
 ! Call urban
 
@@ -1699,8 +1710,10 @@ CONTAINS
               G_URB2D(I,J)     = 0.
               RN_URB2D(I,J)    = 0.
             endif
-!          IF( IVGTYP(I,J) == 1 .or. IVGTYP(I,J) == LOW_DENSITY_RESIDENTIAL .or. &
-!                  IVGTYP(I,J) == HIGH_DENSITY_RESIDENTIAL .or. IVGTYP(I,J) == HIGH_INTENSITY_INDUSTRIAL) THEN
+!           IF( IVGTYP(I,J) == 1 .or. IVGTYP(I,J) == URBAN_ZONE_1 .or. &
+!               IVGTYP(I,J) == URBAN_ZONE_2 .or. IVGTYP(I,J) == URBAN_ZONE_3 .or. IVGTYP(I,J) == URBAN_ZONE_4 .or. &
+!               IVGTYP(I,J) == URBAN_ZONE_5 .or. IVGTYP(I,J) == URBAN_ZONE_6 .or. IVGTYP(I,J) == URBAN_ZONE_7 .or. &
+!               IVGTYP(I,J) == URBAN_ZONE_8 .or. IVGTYP(I,J) == URBAN_ZONE_9 .or. IVGTYP(I,J) == URBAN_ZONE_10 ) THEN
 !                    print*,'ivgtyp, qfx, hfx',ivgtyp(i,j),hfx_rural(i,j),qfx_rural(i,j)
 !                    print*,'ivgtyp,hfx,hfx_urb,hfx_rural',hfx(i,j),hfx_urb(i,j),hfx_rural(i,j)
 !                    print*,'lh,lh_rural',lh(i,j),lh_rural(i,j)
@@ -2063,11 +2076,25 @@ CONTAINS
              CALL wrf_message     ("Expected low and high density residential, and high density industrial information in VEGPARM.TBL")
              CALL wrf_error_fatal ("This could be caused by using an older VEGPARM.TBL file with a newer WRF source code.")
           ENDIF
-          READ (19,*)LOW_DENSITY_RESIDENTIAL
+          READ (19,*)URBAN_ZONE_1
           READ (19,*)
-          READ (19,*)HIGH_DENSITY_RESIDENTIAL
+          READ (19,*)URBAN_ZONE_2
           READ (19,*)
-          READ (19,*)HIGH_INTENSITY_INDUSTRIAL
+          READ (19,*)URBAN_ZONE_3
+          READ (19,*)
+          READ (19,*)URBAN_ZONE_4
+          READ (19,*)
+          READ (19,*)URBAN_ZONE_5
+          READ (19,*)
+          READ (19,*)URBAN_ZONE_6
+          READ (19,*)
+          READ (19,*)URBAN_ZONE_7
+          READ (19,*)
+          READ (19,*)URBAN_ZONE_8
+          READ (19,*)
+          READ (19,*)URBAN_ZONE_9
+          READ (19,*)
+          READ (19,*)URBAN_ZONE_10
         ENDIF
 !
  2002   CONTINUE
@@ -2105,9 +2132,16 @@ CONTAINS
       CALL wrf_dm_bcast_real    ( RSMAX_DATA  , 1 )
       CALL wrf_dm_bcast_integer ( BARE    , 1 )
       CALL wrf_dm_bcast_integer ( NATURAL , 1 )
-      CALL wrf_dm_bcast_integer ( LOW_DENSITY_RESIDENTIAL , 1 )
-      CALL wrf_dm_bcast_integer ( HIGH_DENSITY_RESIDENTIAL , 1 )
-      CALL wrf_dm_bcast_integer ( HIGH_INTENSITY_INDUSTRIAL , 1 )
+      CALL wrf_dm_bcast_integer ( URBAN_ZONE_1 , 1 )
+      CALL wrf_dm_bcast_integer ( URBAN_ZONE_2 , 1 )
+      CALL wrf_dm_bcast_integer ( URBAN_ZONE_3 , 1 )
+      CALL wrf_dm_bcast_integer ( URBAN_ZONE_4 , 1 )
+      CALL wrf_dm_bcast_integer ( URBAN_ZONE_5 , 1 )
+      CALL wrf_dm_bcast_integer ( URBAN_ZONE_6 , 1 )
+      CALL wrf_dm_bcast_integer ( URBAN_ZONE_7 , 1 )
+      CALL wrf_dm_bcast_integer ( URBAN_ZONE_8 , 1 )
+      CALL wrf_dm_bcast_integer ( URBAN_ZONE_9 , 1 )
+      CALL wrf_dm_bcast_integer ( URBAN_ZONE_10 , 1 )
 
 !
 !-----READ IN SOIL PROPERTIES FROM SOILPARM.TBL
@@ -3283,8 +3317,10 @@ SUBROUTINE lsm_mosaic(DZ8W,QV3D,P8W3D,T3D,TSK,                      &
       	!   IF(SF_URBAN_PHYSICS == 1.OR. SF_URBAN_PHYSICS==2.OR.SF_URBAN_PHYSICS==3 ) THEN
                        
       
-           !           IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == LOW_DENSITY_RESIDENTIAL .or. &
-           !            IVGTYP(I,J) == HIGH_DENSITY_RESIDENTIAL .or. IVGTYP(I,J) == HIGH_INTENSITY_INDUSTRIAL) THEN
+           !     IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == URBAN_ZONE_1 .or. &
+           !         IVGTYP(I,J) == URBAN_ZONE_2 .or. IVGTYP(I,J) == URBAN_ZONE_3 .or. IVGTYP(I,J) == URBAN_ZONE_4 .or. &
+           !         IVGTYP(I,J) == URBAN_ZONE_5 .or. IVGTYP(I,J) == URBAN_ZONE_6 .or. IVGTYP(I,J) == URBAN_ZONE_7 .or. &
+           !         IVGTYP(I,J) == URBAN_ZONE_8 .or. IVGTYP(I,J) == URBAN_ZONE_9 .or. IVGTYP(I,J) == URBAN_ZONE_10 ) THEN
            !	 VEGTYP = NATURAL
            !            SHDFAC = SHDTBL(NATURAL)
            !            ALBEDOK =0.2         !  0.2
@@ -3304,40 +3340,42 @@ SUBROUTINE lsm_mosaic(DZ8W,QV3D,P8W3D,T3D,TSK,                      &
          !              ENDIF
          !             ENDIF
           !       ELSE
-           !            IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == LOW_DENSITY_RESIDENTIAL .or. &
-          !              IVGTYP(I,J) == HIGH_DENSITY_RESIDENTIAL .or. IVGTYP(I,J) == HIGH_INTENSITY_INDUSTRIAL) THEN
-           !             VEGTYP = ISURBAN
-           !      	 ENDIF
+           !          IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == URBAN_ZONE_1 .or. &
+           !              IVGTYP(I,J) == URBAN_ZONE_2 .or. IVGTYP(I,J) == URBAN_ZONE_3 .or. IVGTYP(I,J) == URBAN_ZONE_4 .or. &
+           !              IVGTYP(I,J) == URBAN_ZONE_5 .or. IVGTYP(I,J) == URBAN_ZONE_6 .or. IVGTYP(I,J) == URBAN_ZONE_7 .or. &
+           !              IVGTYP(I,J) == URBAN_ZONE_8 .or. IVGTYP(I,J) == URBAN_ZONE_9 .or. IVGTYP(I,J) == URBAN_ZONE_10 ) THEN
+           !                  VEGTYP = ISURBAN
+           !          ENDIF
            !      ENDIF
       
             Noah_call=.TRUE.
       
-            If ( SF_URBAN_PHYSICS == 0 ) THEN   ! ONLY NOAH
-      
-                 IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == LOW_DENSITY_RESIDENTIAL .or. &
-                       IVGTYP(I,J) == HIGH_DENSITY_RESIDENTIAL .or. IVGTYP(I,J) == HIGH_INTENSITY_INDUSTRIAL) THEN
-                       Noah_call = .TRUE.                 
-                       VEGTYP = ISURBAN
-                 ENDIF
-      
+            IF( SF_URBAN_PHYSICS == 0 ) THEN   ! ONLY NOAH
+                IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == URBAN_ZONE_1 .or. &
+                    IVGTYP(I,J) == URBAN_ZONE_2 .or. IVGTYP(I,J) == URBAN_ZONE_3 .or. IVGTYP(I,J) == URBAN_ZONE_4 .or. &
+                    IVGTYP(I,J) == URBAN_ZONE_5 .or. IVGTYP(I,J) == URBAN_ZONE_6 .or. IVGTYP(I,J) == URBAN_ZONE_7 .or. &
+                    IVGTYP(I,J) == URBAN_ZONE_8 .or. IVGTYP(I,J) == URBAN_ZONE_9 .or. IVGTYP(I,J) == URBAN_ZONE_10 ) THEN
+                 
+                      Noah_call = .TRUE.                 
+                      VEGTYP = ISURBAN
+              ENDIF
             ENDIF
             
-            IF(SF_URBAN_PHYSICS == 1) THEN
-      
-                 IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == LOW_DENSITY_RESIDENTIAL .or. &
-                       IVGTYP(I,J) == HIGH_DENSITY_RESIDENTIAL .or. IVGTYP(I,J) == HIGH_INTENSITY_INDUSTRIAL) THEN   
-              	
-                       Noah_call = .TRUE.                       
-              	       VEGTYP = NATURAL                                              
-                       SHDFAC = SHDTBL(NATURAL)
-                       ALBEDOK =0.2         !  0.2
-                       ALBBRD  =0.2         !  0.2
-                       EMISSI = 0.98        !  for VEGTYP=5       
+            IF( SF_URBAN_PHYSICS == 1 ) THEN
+                IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == URBAN_ZONE_1 .or. &
+                    IVGTYP(I,J) == URBAN_ZONE_2 .or. IVGTYP(I,J) == URBAN_ZONE_3 .or. IVGTYP(I,J) == URBAN_ZONE_4 .or. &
+                    IVGTYP(I,J) == URBAN_ZONE_5 .or. IVGTYP(I,J) == URBAN_ZONE_6 .or. IVGTYP(I,J) == URBAN_ZONE_7 .or. &
+                    IVGTYP(I,J) == URBAN_ZONE_8 .or. IVGTYP(I,J) == URBAN_ZONE_9 .or. IVGTYP(I,J) == URBAN_ZONE_10 ) THEN
+                  
+                      Noah_call = .TRUE.                       
+                      VEGTYP = NATURAL                                              
+                      SHDFAC = SHDTBL(NATURAL)
+                      ALBEDOK =0.2         !  0.2
+                      ALBBRD  =0.2         !  0.2
+                      EMISSI = 0.98        !  for VEGTYP=5       
                        
-      		      T1= TS_RUL2D_mosaic(I,mosaic_i,J)
-                       
-                 ENDIF
-      
+                      T1= TS_RUL2D_mosaic(I,mosaic_i,J)
+                ENDIF
             ENDIF
 
 !===Yang, 2014/10/08, hydrological processes for urban vegetation in single layer UCM===
@@ -3351,8 +3389,10 @@ SUBROUTINE lsm_mosaic(DZ8W,QV3D,P8W3D,T3D,TSK,                      &
            if (tloc==0) tloc=24
            CALL cal_mon_day(julian,julyr,jmonth,jday) 
 	  IF(SF_URBAN_PHYSICS == 1) THEN
-           IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == LOW_DENSITY_RESIDENTIAL .or. &
-                IVGTYP(I,J) == HIGH_DENSITY_RESIDENTIAL .or. IVGTYP(I,J) == HIGH_INTENSITY_INDUSTRIAL) THEN
+           IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == URBAN_ZONE_1 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_2 .or. IVGTYP(I,J) == URBAN_ZONE_3 .or. IVGTYP(I,J) == URBAN_ZONE_4 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_5 .or. IVGTYP(I,J) == URBAN_ZONE_6 .or. IVGTYP(I,J) == URBAN_ZONE_7 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_8 .or. IVGTYP(I,J) == URBAN_ZONE_9 .or. IVGTYP(I,J) == URBAN_ZONE_10 ) THEN
             AOASIS = oasis  ! urban oasis effect
                    IF (IRIOPTION ==1) THEN
                    IF (tloc==21 .or. tloc==22) THEN  !irrigation on vegetaion in urban area, MAY-SEP, 9-10pm
@@ -3595,20 +3635,35 @@ SUBROUTINE lsm_mosaic(DZ8W,QV3D,P8W3D,T3D,TSK,                      &
       !--------------------------------------
       ! Input variables lsm --> urban
       
-                IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == LOW_DENSITY_RESIDENTIAL .or. &
-                    IVGTYP(I,J) == HIGH_DENSITY_RESIDENTIAL .or. IVGTYP(I,J) == HIGH_INTENSITY_INDUSTRIAL ) THEN            
-      
-                !  UTYPE_URB = UTYPE_URB2D(I,J) !urban type (low, high or industrial)
+                IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == URBAN_ZONE_1 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_2 .or. IVGTYP(I,J) == URBAN_ZONE_3 .or. IVGTYP(I,J) == URBAN_ZONE_4 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_5 .or. IVGTYP(I,J) == URBAN_ZONE_6 .or. IVGTYP(I,J) == URBAN_ZONE_7 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_8 .or. IVGTYP(I,J) == URBAN_ZONE_9 .or. IVGTYP(I,J) == URBAN_ZONE_10 ) THEN
+                !  UTYPE_URB = UTYPE_URB2D(I,J) !urban type (low, high or industrial, or local climate zones 1-10)
                 !  this need to be changed in the mosaic danli
       
                 IF(IVGTYP(I,J)==ISURBAN) UTYPE_URB=2
-                IF(IVGTYP(I,J)==LOW_DENSITY_RESIDENTIAL) UTYPE_URB=1
-                IF(IVGTYP(I,J)==HIGH_DENSITY_RESIDENTIAL) UTYPE_URB=2
-                IF(IVGTYP(I,J)==HIGH_INTENSITY_INDUSTRIAL) UTYPE_URB=3
+                IF(IVGTYP(I,J)==URBAN_ZONE_1) UTYPE_URB=1
+                IF(IVGTYP(I,J)==URBAN_ZONE_2) UTYPE_URB=2
+                IF(IVGTYP(I,J)==URBAN_ZONE_3) UTYPE_URB=3
+                IF(IVGTYP(I,J)==URBAN_ZONE_4) UTYPE_URB=4
+                IF(IVGTYP(I,J)==URBAN_ZONE_5) UTYPE_URB=5
+                IF(IVGTYP(I,J)==URBAN_ZONE_6) UTYPE_URB=6
+                IF(IVGTYP(I,J)==URBAN_ZONE_7) UTYPE_URB=7
+                IF(IVGTYP(I,J)==URBAN_ZONE_8) UTYPE_URB=8
+                IF(IVGTYP(I,J)==URBAN_ZONE_9) UTYPE_URB=9
+                IF(IVGTYP(I,J)==URBAN_ZONE_10) UTYPE_URB=10
                         
-                IF(UTYPE_URB==1) FRC_URB2D(I,J)=0.5
-                IF(UTYPE_URB==2) FRC_URB2D(I,J)=0.9
-                IF(UTYPE_URB==3) FRC_URB2D(I,J)=0.95
+                IF(UTYPE_URB==1) FRC_URB2D(I,J)=1
+                IF(UTYPE_URB==2) FRC_URB2D(I,J)=0.95
+                IF(UTYPE_URB==3) FRC_URB2D(I,J)=0.9
+                IF(UTYPE_URB==4) FRC_URB2D(I,J)=0.65
+                IF(UTYPE_URB==5) FRC_URB2D(I,J)=0.7
+                IF(UTYPE_URB==6) FRC_URB2D(I,J)=0.65
+                IF(UTYPE_URB==7) FRC_URB2D(I,J)=0.85
+                IF(UTYPE_URB==8) FRC_URB2D(I,J)=0.85
+                IF(UTYPE_URB==9) FRC_URB2D(I,J)=0.3
+                IF(UTYPE_URB==10) FRC_URB2D(I,J)=0.55
       
                   TA_URB    = SFCTMP           ! [K]
                   QA_URB    = Q2K              ! [kg/kg]
@@ -4204,31 +4259,35 @@ SUBROUTINE lsm_mosaic(DZ8W,QV3D,P8W3D,T3D,TSK,                      &
       
       !Fei: urban. for urban surface, if calling UCM, redefine the natural surface in cities as
       ! the "NATURAL" category in the VEGPARM.TBL
-      	
-      	   IF(SF_URBAN_PHYSICS == 1.OR. SF_URBAN_PHYSICS==2.OR.SF_URBAN_PHYSICS==3 ) THEN
-                      IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == LOW_DENSITY_RESIDENTIAL .or. &
-                        IVGTYP(I,J) == HIGH_DENSITY_RESIDENTIAL .or. IVGTYP(I,J) == HIGH_INTENSITY_INDUSTRIAL) THEN
-      		 VEGTYP = NATURAL
+
+           IF(SF_URBAN_PHYSICS == 1 .or. SF_URBAN_PHYSICS==2 .or. SF_URBAN_PHYSICS==3 ) THEN
+               IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == URBAN_ZONE_1 .or. &
+                   IVGTYP(I,J) == URBAN_ZONE_2 .or. IVGTYP(I,J) == URBAN_ZONE_3 .or. IVGTYP(I,J) == URBAN_ZONE_4 .or. &
+                   IVGTYP(I,J) == URBAN_ZONE_5 .or. IVGTYP(I,J) == URBAN_ZONE_6 .or. IVGTYP(I,J) == URBAN_ZONE_7 .or. &
+                   IVGTYP(I,J) == URBAN_ZONE_8 .or. IVGTYP(I,J) == URBAN_ZONE_9 .or. IVGTYP(I,J) == URBAN_ZONE_10 ) THEN
+                       VEGTYP = NATURAL
                        SHDFAC = SHDTBL(NATURAL)
                        ALBEDOK =0.2         !  0.2
                        ALBBRD  =0.2         !0.2
                        EMISSI = 0.98                                 !for VEGTYP=5
-      		 IF ( FRC_URB2D(I,J) < 0.99 ) THEN
-                   if(sf_urban_physics.eq.1)then
-                     T1= ( TSK(I,J) -FRC_URB2D(I,J) * TS_URB2D (I,J) )/ (1-FRC_URB2D(I,J))
-                   elseif((sf_urban_physics.eq.2).OR.(sf_urban_physics.eq.3))then
-                     T1=tsk_rural_bep(i,j)
-                   endif
-     	         ELSE
-      		 T1 = TSK(I,J)
+                       IF ( FRC_URB2D(I,J) < 0.99 ) THEN
+                           if(sf_urban_physics.eq.1)then
+                             T1= ( TSK(I,J) -FRC_URB2D(I,J) * TS_URB2D (I,J) )/ (1-FRC_URB2D(I,J))
+                           elseif((sf_urban_physics.eq.2).OR.(sf_urban_physics.eq.3))then
+                             T1=tsk_rural_bep(i,j)
+                           endif
+                       ELSE
+                           T1 = TSK(I,J)
                        ENDIF
-                      ENDIF
-                 ELSE
-                       IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == LOW_DENSITY_RESIDENTIAL .or. &
-                        IVGTYP(I,J) == HIGH_DENSITY_RESIDENTIAL .or. IVGTYP(I,J) == HIGH_INTENSITY_INDUSTRIAL) THEN
-                        VEGTYP = ISURBAN
-                 	 ENDIF
-                 ENDIF
+               ENDIF
+           ELSE
+               IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == URBAN_ZONE_1 .or. &
+                   IVGTYP(I,J) == URBAN_ZONE_2 .or. IVGTYP(I,J) == URBAN_ZONE_3 .or. IVGTYP(I,J) == URBAN_ZONE_4 .or. &
+                   IVGTYP(I,J) == URBAN_ZONE_5 .or. IVGTYP(I,J) == URBAN_ZONE_6 .or. IVGTYP(I,J) == URBAN_ZONE_7 .or. &
+                   IVGTYP(I,J) == URBAN_ZONE_8 .or. IVGTYP(I,J) == URBAN_ZONE_9 .or. IVGTYP(I,J) == URBAN_ZONE_10 ) THEN
+                       VEGTYP = ISURBAN
+               ENDIF
+           ENDIF
 
 
 !===Yang, 2014/10/08, hydrological processes for urban vegetation in single layer UCM===
@@ -4242,8 +4301,10 @@ SUBROUTINE lsm_mosaic(DZ8W,QV3D,P8W3D,T3D,TSK,                      &
            if (tloc==0) tloc=24
            CALL cal_mon_day(julian,julyr,jmonth,jday) 
 	  IF(SF_URBAN_PHYSICS == 1) THEN
-           IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == LOW_DENSITY_RESIDENTIAL .or. &
-                IVGTYP(I,J) == HIGH_DENSITY_RESIDENTIAL .or. IVGTYP(I,J) == HIGH_INTENSITY_INDUSTRIAL) THEN
+            IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == URBAN_ZONE_1 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_2 .or. IVGTYP(I,J) == URBAN_ZONE_3 .or. IVGTYP(I,J) == URBAN_ZONE_4 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_5 .or. IVGTYP(I,J) == URBAN_ZONE_6 .or. IVGTYP(I,J) == URBAN_ZONE_7 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_8 .or. IVGTYP(I,J) == URBAN_ZONE_9 .or. IVGTYP(I,J) == URBAN_ZONE_10 ) THEN
             AOASIS = oasis  ! urban oasis effect
                    IF (IRIOPTION ==1) THEN
                    IF (tloc==21 .or. tloc==22) THEN  !irrigation on vegetaion in urban area, MAY-SEP, 9-10pm
@@ -4479,8 +4540,10 @@ SUBROUTINE lsm_mosaic(DZ8W,QV3D,P8W3D,T3D,TSK,                      &
       !--------------------------------------
       ! Input variables lsm --> urban
       
-                IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == LOW_DENSITY_RESIDENTIAL .or. &
-                    IVGTYP(I,J) == HIGH_DENSITY_RESIDENTIAL .or. IVGTYP(I,J) ==  HIGH_INTENSITY_INDUSTRIAL) THEN
+                 IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == URBAN_ZONE_1 .or. &
+                     IVGTYP(I,J) == URBAN_ZONE_2 .or. IVGTYP(I,J) == URBAN_ZONE_3 .or. IVGTYP(I,J) == URBAN_ZONE_4 .or. &
+                     IVGTYP(I,J) == URBAN_ZONE_5 .or. IVGTYP(I,J) == URBAN_ZONE_6 .or. IVGTYP(I,J) == URBAN_ZONE_7 .or. &
+                     IVGTYP(I,J) == URBAN_ZONE_8 .or. IVGTYP(I,J) == URBAN_ZONE_9 .or. IVGTYP(I,J) == URBAN_ZONE_10 ) THEN
       
       ! Call urban
       !

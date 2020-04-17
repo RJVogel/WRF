@@ -348,7 +348,7 @@ CONTAINS
    USE module_sf_qnsesfc
    USE module_sf_gfs
    USE module_sf_noahdrv                           ! danli mosaic, the " ,only : lsm " needs to be deleted 
-   USE module_sf_noahlsm, only : LOW_DENSITY_RESIDENTIAL, HIGH_DENSITY_RESIDENTIAL, HIGH_INTENSITY_INDUSTRIAL
+   USE module_sf_noahlsm, only :   URBAN_ZONE_1, URBAN_ZONE_2, URBAN_ZONE_3, URBAN_ZONE_4, URBAN_ZONE_5, URBAN_ZONE_6, URBAN_ZONE_7, URBAN_ZONE_8, URBAN_ZONE_9, URBAN_ZONE_10
    USE module_sf_noahmpdrv, only : noahmplsm, noahmp_urban
    USE module_sf_noahmp_groundwater
    USE module_sf_noah_seaice_drv
@@ -2949,10 +2949,10 @@ CONTAINS
      IF(SF_URBAN_PHYSICS.eq.1) THEN
        DO j=j_start(ij),j_end(ij)                             !urban
          DO i=i_start(ij),i_end(ij)                           !urban
-          IF( IVGTYP(I,J) == ISURBAN .or. &
-	      IVGTYP(I,J) == LOW_DENSITY_RESIDENTIAL .or. & !urban
-              IVGTYP(I,J) == HIGH_DENSITY_RESIDENTIAL .or.&
-	      IVGTYP(I,J) == HIGH_INTENSITY_INDUSTRIAL) THEN  !urban
+          IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == URBAN_ZONE_1 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_2 .or. IVGTYP(I,J) == URBAN_ZONE_3 .or. IVGTYP(I,J) == URBAN_ZONE_4 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_5 .or. IVGTYP(I,J) == URBAN_ZONE_6 .or. IVGTYP(I,J) == URBAN_ZONE_7 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_8 .or. IVGTYP(I,J) == URBAN_ZONE_9 .or. IVGTYP(I,J) == URBAN_ZONE_10 ) THEN
              U10(I,J)  = U10_URB2D(I,J)                       !urban
              V10(I,J)  = V10_URB2D(I,J)                       !urban
              PSIM(I,J) = PSIM_URB2D(I,J)                      !urban
@@ -2969,10 +2969,10 @@ CONTAINS
      IF((SF_URBAN_PHYSICS.eq.2).OR.(SF_URBAN_PHYSICS.eq.3)) THEN
        DO j=j_start(ij),j_end(ij)                             !urban
          DO i=i_start(ij),i_end(ij)                           !urban
-          IF( IVGTYP(I,J) == ISURBAN .or. &
-	      IVGTYP(I,J) == LOW_DENSITY_RESIDENTIAL .or. & !urban
-              IVGTYP(I,J) == HIGH_DENSITY_RESIDENTIAL .or. &
-	      IVGTYP(I,J) == HIGH_INTENSITY_INDUSTRIAL) THEN !urban
+          IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == URBAN_ZONE_1 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_2 .or. IVGTYP(I,J) == URBAN_ZONE_3 .or. IVGTYP(I,J) == URBAN_ZONE_4 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_5 .or. IVGTYP(I,J) == URBAN_ZONE_6 .or. IVGTYP(I,J) == URBAN_ZONE_7 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_8 .or. IVGTYP(I,J) == URBAN_ZONE_9 .or. IVGTYP(I,J) == URBAN_ZONE_10 ) THEN
             T2(I,J)   = TH_PHY(i,1,j)/((1.E5/PSFC(I,J))**RCP) !urban
             TH2(I,J) = TH_PHY(i,1,j) !urban
             Q2(I,J)   = qv_curr(i,1,j)  !urban
@@ -3281,11 +3281,11 @@ CONTAINS
                  ENDIF
                    TH2(I,J) = T2(I,J)*(1.E5/PSFC(I,J))**RCP
 !             ELSEIF (IVGTYP(I,J) == ISURBAN .OR. IVGTYP(I,J) == ISICE .OR. FVEGXY(I,J) == 0.0 ) THEN
-              ELSEIF (IVGTYP(I,J) == ISURBAN                   .or. &
-	              IVGTYP(I,J) == LOW_DENSITY_RESIDENTIAL   .or. & !urban
-                      IVGTYP(I,J) == HIGH_DENSITY_RESIDENTIAL  .or. & !urban
-	              IVGTYP(I,J) == HIGH_INTENSITY_INDUSTRIAL .or. & !urban
-	              (IVGTYP(I,J) == ISICE .AND. XICE(I,J) .LT. XICE_THRESHOLD)) THEN
+              ELSEIF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == URBAN_ZONE_1 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_2 .or. IVGTYP(I,J) == URBAN_ZONE_3 .or. IVGTYP(I,J) == URBAN_ZONE_4 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_5 .or. IVGTYP(I,J) == URBAN_ZONE_6 .or. IVGTYP(I,J) == URBAN_ZONE_7 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_8 .or. IVGTYP(I,J) == URBAN_ZONE_9 .or. IVGTYP(I,J) == URBAN_ZONE_10 .or. &
+                 (IVGTYP(I,J) == ISICE .AND. XICE(I,J) .LT. XICE_THRESHOLD)) THEN
                    Q2(I,J)  = Q2MBXY(I,J)
                    T2(I,J)  = T2MBXY(I,J)
                    TH2(I,J) = T2(i,j)*(1.E5/PSFC(i,j))**RCP
@@ -3308,8 +3308,10 @@ CONTAINS
          IF(SF_URBAN_PHYSICS.eq.1) THEN
            DO j=j_start(ij),j_end(ij)                             !urban
              DO i=i_start(ij),i_end(ij)                           !urban
-              IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == LOW_DENSITY_RESIDENTIAL .or. &  !urban
-                  IVGTYP(I,J) == HIGH_DENSITY_RESIDENTIAL .or. IVGTYP(I,J) == HIGH_INTENSITY_INDUSTRIAL ) THEN !urban
+             IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == URBAN_ZONE_1 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_2 .or. IVGTYP(I,J) == URBAN_ZONE_3 .or. IVGTYP(I,J) == URBAN_ZONE_4 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_5 .or. IVGTYP(I,J) == URBAN_ZONE_6 .or. IVGTYP(I,J) == URBAN_ZONE_7 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_8 .or. IVGTYP(I,J) == URBAN_ZONE_9 .or. IVGTYP(I,J) == URBAN_ZONE_10 ) THEN 
                  Q2(I,J)  = (FVEGXY(I,J)*Q2MVXY(I,J) + (1.-FVEGXY(I,J))*Q2MBXY(I,J))*(1.-FRC_URB2D(I,J)) +   &
                              Q2_URB2D(I,J)*FRC_URB2D(I,J)
                  T2(I,J)  = (FVEGXY(I,J)*T2MVXY(I,J) + (1.-FVEGXY(I,J))*T2MBXY(I,J))*(1.-FRC_URB2D(I,J)) +   &
@@ -3330,8 +3332,10 @@ CONTAINS
          IF((SF_URBAN_PHYSICS.eq.2).OR.(SF_URBAN_PHYSICS.eq.3)) THEN
            DO j=j_start(ij),j_end(ij)                             !urban
              DO i=i_start(ij),i_end(ij)                           !urban
-              IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == LOW_DENSITY_RESIDENTIAL .or. &  !urban
-                  IVGTYP(I,J) == HIGH_DENSITY_RESIDENTIAL .or. IVGTYP(I,J) == HIGH_INTENSITY_INDUSTRIAL ) THEN !urban
+              IF( IVGTYP(I,J) == ISURBAN .or. IVGTYP(I,J) == URBAN_ZONE_1 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_2 .or. IVGTYP(I,J) == URBAN_ZONE_3 .or. IVGTYP(I,J) == URBAN_ZONE_4 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_5 .or. IVGTYP(I,J) == URBAN_ZONE_6 .or. IVGTYP(I,J) == URBAN_ZONE_7 .or. &
+                  IVGTYP(I,J) == URBAN_ZONE_8 .or. IVGTYP(I,J) == URBAN_ZONE_9 .or. IVGTYP(I,J) == URBAN_ZONE_10 ) THEN
                 T2(I,J)   = TH_PHY(i,1,j)/((1.E5/PSFC(I,J))**RCP) !urban
                 TH2(I,J) = TH_PHY(i,1,j) !urban
                 Q2(I,J)   = qv_curr(i,1,j)  !urban

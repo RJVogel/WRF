@@ -18,7 +18,7 @@ use module_wrf_error
 ! -----------------------------------------------------------------------
 
       integer nurbm           ! Maximum number of urban classes    
-      parameter (nurbm=3)
+      parameter (nurbm=10)
 
       integer ndm             ! Maximum number of street directions 
       parameter (ndm=2)

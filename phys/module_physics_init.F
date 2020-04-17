@@ -2492,9 +2492,12 @@ CONTAINS
    USE module_sf_myjsfc
    USE module_sf_qnsesfc
    USE module_sf_noahdrv
-   USE module_sf_noahlsm, only : LOW_DENSITY_RESIDENTIAL, HIGH_DENSITY_RESIDENTIAL, HIGH_INTENSITY_INDUSTRIAL
+   USE module_sf_noahlsm, only : URBAN_ZONE_1,URBAN_ZONE_2,URBAN_ZONE_3,URBAN_ZONE_4,URBAN_ZONE_5, &
+                                 URBAN_ZONE_6,URBAN_ZONE_7,URBAN_ZONE_8,URBAN_ZONE_9,URBAN_ZONE_10
    USE module_sf_noahmpdrv
-   USE noahmp_tables, ONLY: LOW_DENSITY_RESIDENTIAL_TABLE, HIGH_DENSITY_RESIDENTIAL_TABLE, HIGH_INTENSITY_INDUSTRIAL_TABLE
+   USE noahmp_tables, ONLY: URBAN_ZONE_1_TABLE,URBAN_ZONE_2_TABLE,URBAN_ZONE_3_TABLE,URBAN_ZONE_4_TABLE, &
+                            URBAN_ZONE_5_TABLE,URBAN_ZONE_6_TABLE,URBAN_ZONE_7_TABLE,URBAN_ZONE_8_TABLE, &
+                            URBAN_ZONE_9_TABLE,URBAN_ZONE_10_TABLE
 #ifdef WRF_USE_CLM
    USE module_sf_clm, only : clminit
 #endif
@@ -3088,9 +3091,16 @@ CONTAINS
                 CALL urban_var_init(ISURBAN,TSK,TSLB,TMN,IVGTYP,                     & !urban
                               ims,ime,jms,jme,kms,kme,num_soil_layers,               & !urban
 !                              num_roof_layers,num_wall_layers,num_road_layers, & !urban
-                              LOW_DENSITY_RESIDENTIAL,                       &
-                              HIGH_DENSITY_RESIDENTIAL,                      &
-                              HIGH_INTENSITY_INDUSTRIAL,                       &
+                              URBAN_ZONE_1,                                          & !urban
+                              URBAN_ZONE_2,                                          & !urban
+                              URBAN_ZONE_3,                                          & !urban
+                              URBAN_ZONE_4,                                          & !urban
+                              URBAN_ZONE_5,                                          & !urban
+                              URBAN_ZONE_6,                                          & !urban
+                              URBAN_ZONE_7,                                          & !urban
+                              URBAN_ZONE_8,                                          & !urban
+                              URBAN_ZONE_9,                                          & !urban
+                              URBAN_ZONE_10,                                         & !urban
                               restart,sf_urban_physics,                        & !urban
                               XXXR_URB2D,XXXB_URB2D,XXXG_URB2D,XXXC_URB2D,     & !urban
                               TR_URB2D,TB_URB2D,TG_URB2D,TC_URB2D,QC_URB2D,    & !urban
@@ -3204,9 +3214,16 @@ CALL lsm_mosaic_init(IVGTYP,config_flags%ISWATER,config_flags%ISURBAN,config_fla
                                 sf_urban_physics)
                 CALL urban_var_init(ISURBAN,TSK,TSLB,TMN,IVGTYP,               & !urban
                               ims,ime,jms,jme,kms,kme,num_soil_layers,         & !urban
-                              LOW_DENSITY_RESIDENTIAL_TABLE,                   &
-		              HIGH_DENSITY_RESIDENTIAL_TABLE,                  &
-		              HIGH_INTENSITY_INDUSTRIAL_TABLE,                 &
+                              URBAN_ZONE_1_TABLE,                              & !urban
+                              URBAN_ZONE_2_TABLE,                              & !urban
+                              URBAN_ZONE_3_TABLE,                              & !urban
+                              URBAN_ZONE_4_TABLE,                              & !urban
+                              URBAN_ZONE_5_TABLE,                              & !urban
+                              URBAN_ZONE_6_TABLE,                              & !urban
+                              URBAN_ZONE_7_TABLE,                              & !urban
+                              URBAN_ZONE_8_TABLE,                              & !urban
+                              URBAN_ZONE_9_TABLE,                              & !urban
+                              URBAN_ZONE_10_TABLE,                             & !urban
                               restart,sf_urban_physics,                        & !urban
                               XXXR_URB2D,XXXB_URB2D,XXXG_URB2D,XXXC_URB2D,     & !urban
                               TR_URB2D,TB_URB2D,TG_URB2D,TC_URB2D,QC_URB2D,    & !urban

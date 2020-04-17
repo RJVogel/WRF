@@ -3915,7 +3915,8 @@ CONTAINS
 
   USE module_date_time
   USE module_sf_urban, only: urban
-  USE module_sf_noahlsm, only: low_density_residential, high_density_residential, high_intensity_industrial
+  USE module_sf_noahlsm, only: URBAN_ZONE_1,URBAN_ZONE_2,URBAN_ZONE_3,URBAN_ZONE_4,URBAN_ZONE_5, &
+                               URBAN_ZONE_6,URBAN_ZONE_7,URBAN_ZONE_8,URBAN_ZONE_9,URBAN_ZONE_10
   USE module_ra_gfdleta,  only: cal_mon_day
   USE module_configure
 
@@ -5121,9 +5122,12 @@ CONTAINS
 !--------------------------------------
 ! Input variables lsm --> urban
 
-          IF( IVGTYP(I,J) == 1 .or. IVGTYP(I,J) == low_density_residential .or. &
-              IVGTYP(I,J) == high_density_residential .or. IVGTYP(I,J) == high_intensity_industrial ) THEN
-
+          IF( IVGTYP(I,J) == 1 .or. IVGTYP(I,J) == URBAN_ZONE_1 .or. &
+              IVGTYP(I,J) == URBAN_ZONE_2 .or. IVGTYP(I,J) == URBAN_ZONE_3 .or. & 
+              IVGTYP(I,J) == URBAN_ZONE_4 .or. IVGTYP(I,J) == URBAN_ZONE_5 .or. &
+              IVGTYP(I,J) == URBAN_ZONE_6 .or. IVGTYP(I,J) == URBAN_ZONE_7 .or. &
+              IVGTYP(I,J) == URBAN_ZONE_8 .or. IVGTYP(I,J) == URBAN_ZONE_9 .or. &
+              IVGTYP(I,J) == URBAN_ZONE_10 ) THEN
 ! Call urban
       forc_sols_buf  = swd_buf*0.35
       forc_soll_buf  = swd_buf*0.35
