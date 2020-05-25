@@ -780,10 +780,11 @@ use module_wrf_error
 
    IF( ZDC+Z0C+2. >= ZA) THEN
     write(mesg,*) 'ZA:', ZA
-    CALL wrf_message(mesg)
+    WRITE_MESSAGE(mesg)
     write(mesg,*) 'ZDC:', ZDC
-    CALL wrf_message(mesg)
+    WRITE_MESSAGE(mesg)
     write(mesg,*) 'Z0C:', Z0C
+    WRITE_MESSAGE(mesg)
     FATAL_ERROR("ZDC + Z0C + 2m is larger than the 1st WRF level - Stop in subroutine urban - change ZDC and Z0C" ) 
    END IF
 
@@ -3186,7 +3187,7 @@ ENDIF
       IF(IVGTYP(I,J) .GT. 30)THEN
       ! IF(IVGTYP(I,J).EQ.URBAN_ZONE_6)THEN
         write(mesg,*) 'Sample of Urban settings'
-        call wrf_message(mesg)
+        WRITE_MESSAGE(mesg)
         write(mesg,*) 'TSURFACE0_URB',TSURFACE0_URB(I,J)
         WRITE_MESSAGE(mesg)
         write(mesg,*) 'TDEEP0_URB', TDEEP0_URB(I,J)
