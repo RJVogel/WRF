@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -x # echo on
+
+# Link metgrid files into directory
+ln -sf ../../WPS/met_em* .
+
+# Run real
+mpirun -np 1 ./real.exe&
+
+# Tail
+sleep 1
+tail -f rsl.out.0000
+
+set +x # echo off

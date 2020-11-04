@@ -1,0 +1,129 @@
+#!/bin/bash
+
+# Take path name as input argument
+RESULTSPATH=${1?Error: no path given! Please specify path, where files should be copied.}
+
+# Create directory
+echo Directory is $RESULTSPATH
+read -p "Create directory (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+        echo Yes
+        echo mkdir -p $RESULTSPATH
+	mkdir -p $RESULTSPATH
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
+# Remove or move restart files
+echo Listing WRF restart files:
+ls wrfrst_*
+read -p "Move (m/Enter) or remove (r) restart files? " answer
+case ${answer:0:2} in
+    m|M|"" )
+	echo Move
+	echo mv wrfrst_* $RESULTSPATH
+	mv wrfrst_* $RESULTSPATH
+    ;;
+    r|R )
+        echo Remove
+	echo rm wrfrst_*
+	rm wrfrst_*
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
+# Move Log files
+echo Listing WRF log files:
+ls rsl.*
+read -p "Move log files (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+        echo Yes
+        echo mv rsl.* $RESULTSPATH
+	mv rsl.* $RESULTSPATH
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
+# Copy geo_em files
+echo Listing geo_em files:
+ls ../../WPS/geo_em*
+read -p "Copy geo_em files (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+        echo Yes
+        echo cp ../WPS/geo_em* $RESULTSPATH
+        cp ../../WPS/geo_em* $RESULTSPATH
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
+# Move Input/Output files
+echo Listing WRF input and output files:
+ls wrfbdy_* wrfinput_* wrfout_* 
+read -p "Move input and output files (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+        echo Yes
+        echo mv wrfbdy_* wrfinput_* wrfout_* $RESULTSPATH
+        mv wrfbdy_* wrfinput_* wrfout_* $RESULTSPATH
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
+# Copy Tables
+echo Listing tables:
+ls GENPARM.TBL SOILPARM.TBL VEGPARM.TBL LANDUSE.TBL MPTABLE.TBL URBPARM.TBL ../../WPS/geogrid/GEOGRID.TBL
+read -p "Copy tables (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+        echo Yes
+        echo cp GENPARM.TBL SOILPARM.TBL VEGPARM.TBL LANDUSE.TBL MPTABLE.TBL URBPARM.TBL ../../WPS/geogrid/GEOGRID.TBL $RESULTSPATH
+        cp GENPARM.TBL SOILPARM.TBL VEGPARM.TBL LANDUSE.TBL MPTABLE.TBL URBPARM.TBL ../../WPS/geogrid/GEOGRID.TBL $RESULTSPATH
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
+# Copy namelist files
+echo Listing namelist files:
+ls namelist.input ../../WPS/namelist.wps
+read -p "Copy namelist files (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+        echo Yes
+        echo cp namelist.input ../../WPS/namelist.wps $RESULTSPATH
+        cp namelist.input ../../WPS/namelist.wps $RESULTSPATH
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
+# Remove met_em links
+echo Listing met_em links:
+ls met_em*
+read -p "Remove met_em links (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+        echo Yes
+        echo rm met_em.*
+        rm met_em.*
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
