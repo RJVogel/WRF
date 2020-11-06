@@ -50,6 +50,100 @@ ROAD_WIDTH: 15.0, 12.7, 5.7, 37.5, 33.3, 12.4, 2.0, 32.5, 10.0, 28.5
 AH:  175.0, 37.5, 37.5, 25.0, 12.5, 12.5, 17.5, 25.0, 5.0, 350.0
 
 #
+# ALH:  Anthropogenic latent heat [ W m{-2} ]
+#      (sf_urban_physics=1)
+#
+
+# ALH:  20.0, 25.0, 40.0
+
+#
+#  AKANDA_URBAN:  Coefficient modifying the Kanda approach to computing
+#  surface layer exchange coefficients.
+#      (sf_urban_physics=1)
+
+AKANDA_URBAN:  1.29, 1.29, 1.29, 1.29, 1.29, 1.29, 1.29, 1.29, 1.29, 1.29
+
+#
+# DDZR:  Thickness of each roof layer [ m ]
+#        This is currently NOT a function urban type, but a function
+#        of the number of layers.  Number of layers must be 4, for now.
+#      (sf_urban_physics=1)
+
+
+DDZR:  0.05, 0.05, 0.10, 0.20
+
+#
+# DDZB:  Thickness of each building wall layer [ m ]
+#        This is currently NOT a function urban type, but a function
+#        of the number of layers.  Number of layers must be 4, for now.
+#      (sf_urban_physics=1)
+#
+
+DDZB: 0.05, 0.05, 0.10, 0.20
+
+#
+# DDZG:  Thickness of each ground (road) layer [ m ]
+#        This is currently NOT a function urban type, but a function
+#        of the number of layers.  Number of layers must be 4, for now.
+#      (sf_urban_physics=1)
+#
+
+DDZG: 0.05, 0.25, 0.50, 0.75
+
+#
+# BOUNDR:  Lower boundary condition for roof layer temperature [ 1: Zero-Flux,  2: T = Constant ]
+#      (sf_urban_physics=1)
+#
+
+BOUNDR: 1
+
+#
+# BOUNDB:  Lower boundary condition for wall layer temperature [ 1: Zero-Flux,  2: T = Constant ]
+#      (sf_urban_physics=1)
+#
+
+BOUNDB: 1
+
+#
+# BOUNDG:  Lower boundary condition for ground (road) layer temperature [ 1: Zero-Flux,  2: T = Constant ]
+#      (sf_urban_physics=1)
+#
+
+BOUNDG: 1
+
+#
+# Ch of Wall and Road [ 1: M-O Similarity Theory, 2: Empirical Form of Narita et al., 1997 (recommended) ]
+#      (sf_urban_physics=1)
+#
+
+CH_SCHEME: 2
+
+#
+# Surface and Layer Temperatures [ 1: 4-layer model,  2: Force-Restore method ]
+#      (sf_urban_physics=1)
+#
+
+TS_SCHEME: 1
+
+#
+# AHOPTION [ 0: No anthropogenic heating,  1: Anthropogenic heating will be added to sensible heat flux term ]
+#      (sf_urban_physics=1)
+#
+
+AHOPTION: 1
+
+#
+# Anthropogenic Heating diurnal profile.
+#   Multiplication factor applied to AH (as defined in the table above)
+#   Hourly values ( 24 of them ), starting at 01 hours Local Time.
+#   For sub-hourly model time steps, value changes on the hour and is
+#   held constant until the next hour.
+#      (sf_urban_physics=1)
+#
+
+AHDIUPRF: 0.19 0.27 0.40 0.53 0.67 0.79 0.89 0.94 0.99 0.99 0.99 1.00 0.95 0.90 0.80 0.72 0.65 0.58 0.51 0.43 0.36 0.30 0.24 0.19
+
+#
 # ALHOPTION [ 0: No anthropogenic latent heat,  1: Anthropogenic heating will be added to latent heat flux term ]
 #      (sf_urban_physics=1)
 #

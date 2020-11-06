@@ -22,6 +22,7 @@ Number of urban categories: 3
 #      (sf_urban_physics=1)
 
 ZR: 11.3,  19.9,  12.7
+
 #
 # SIGMA_ZED:  Standard Deviation of roof height  [ m ]
 #      (sf_urban_physics=1)
@@ -60,7 +61,7 @@ ALH:  20.0, 25.0, 40.0
 #  surface layer exchange coefficients.
 #      (sf_urban_physics=1)
 
-AKANDA_URBAN:  1.29 1.29 1.29
+AKANDA_URBAN:  1.29, 1.29, 1.29
 
 #
 # DDZR:  Thickness of each roof layer [ m ]
