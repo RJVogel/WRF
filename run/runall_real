@@ -3,7 +3,7 @@
 set -x # echo on
 
 # Link metgrid files into directory
-ln -sf ../../WPS/met_em* .
+cp ../../WPS/met_em* .
 
 # Run real
 mpirun -np 1 ./real.exe&

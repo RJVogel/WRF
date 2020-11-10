@@ -672,9 +672,11 @@ CONTAINS
        ENDIF
 
        IF( IVGTYP(I,J) == ISURBAN_TABLE .or. IVGTYP(I,J) == URBAN_ZONE_1_TABLE .or. &
-                  IVGTYP(I,J) == URBAN_ZONE_2_TABLE .or. IVGTYP(I,J) == URBAN_ZONE_3_TABLE .or. IVGTYP(I,J) == URBAN_ZONE_4_TABLE .or. &
-                  IVGTYP(I,J) == URBAN_ZONE_5_TABLE .or. IVGTYP(I,J) == URBAN_ZONE_6_TABLE .or. IVGTYP(I,J) == URBAN_ZONE_7_TABLE .or. &
-                  IVGTYP(I,J) == URBAN_ZONE_8_TABLE .or. IVGTYP(I,J) == URBAN_ZONE_9_TABLE .or. IVGTYP(I,J) == URBAN_ZONE_10_TABLE ) THEN
+           IVGTYP(I,J) == URBAN_ZONE_2_TABLE .or. IVGTYP(I,J) == URBAN_ZONE_3_TABLE .or. &
+           IVGTYP(I,J) == URBAN_ZONE_4_TABLE .or. IVGTYP(I,J) == URBAN_ZONE_5_TABLE .or. &
+           IVGTYP(I,J) == URBAN_ZONE_6_TABLE .or. IVGTYP(I,J) == URBAN_ZONE_7_TABLE .or. &
+           IVGTYP(I,J) == URBAN_ZONE_8_TABLE .or. IVGTYP(I,J) == URBAN_ZONE_9_TABLE .or. &
+           IVGTYP(I,J) == URBAN_ZONE_10_TABLE ) THEN
          IF(SF_URBAN_PHYSICS == 0 ) THEN
            VEGTYP = ISURBAN_TABLE
          ELSE
@@ -2533,7 +2535,11 @@ end function checkIfHarvest
   USE module_sf_bep,      only: bep
   USE module_sf_bep_bem,  only: bep_bem
   USE module_ra_gfdleta,  only: cal_mon_day
-  USE NOAHMP_TABLES, ONLY: ISURBAN_TABLE
+  USE NOAHMP_TABLES, ONLY: ISURBAN_TABLE, URBAN_ZONE_1_TABLE, URBAN_ZONE_2_TABLE, &
+                           URBAN_ZONE_3_TABLE, URBAN_ZONE_4_TABLE, URBAN_ZONE_5_TABLE, &
+                           URBAN_ZONE_6_TABLE, URBAN_ZONE_7_TABLE, URBAN_ZONE_8_TABLE, &
+                           URBAN_ZONE_9_TABLE, URBAN_ZONE_10_TABLE
+
   USE module_model_constants, only: KARMAN, CP, XLV
 !----------------------------------------------------------------
     IMPLICIT NONE
@@ -2836,9 +2842,12 @@ JLOOP : DO J = jts, jte
 
 ILOOP : DO I = its, ite
 
-
-  IF( IVGTYP(I,J) == ISURBAN_TABLE .or. IVGTYP(I,J) == 31 .or. &
-      IVGTYP(I,J) == 32 .or. IVGTYP(I,J) == 33 ) THEN
+  IF( IVGTYP(I,J) == ISURBAN_TABLE .or. IVGTYP(I,J) == URBAN_ZONE_1_TABLE .or. &
+      IVGTYP(I,J) == URBAN_ZONE_2_TABLE .or. IVGTYP(I,J) == URBAN_ZONE_3_TABLE .or. &
+      IVGTYP(I,J) == URBAN_ZONE_4_TABLE .or. IVGTYP(I,J) == URBAN_ZONE_5_TABLE .or. &
+      IVGTYP(I,J) == URBAN_ZONE_6_TABLE .or. IVGTYP(I,J) == URBAN_ZONE_7_TABLE .or. &
+      IVGTYP(I,J) == URBAN_ZONE_8_TABLE .or. IVGTYP(I,J) == URBAN_ZONE_9_TABLE .or. &
+      IVGTYP(I,J) == URBAN_ZONE_10_TABLE ) THEN
 
     UTYPE_URB = UTYPE_URB2D(I,J) !urban type (low, high or industrial)
 

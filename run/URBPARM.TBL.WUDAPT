@@ -54,14 +54,14 @@ AH:  175.0, 37.5, 37.5, 25.0, 12.5, 12.5, 17.5, 25.0, 5.0, 350.0
 #      (sf_urban_physics=1)
 #
 
-# ALH:  20.0, 25.0, 40.0
+ALH:  0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
 
 #
 #  AKANDA_URBAN:  Coefficient modifying the Kanda approach to computing
 #  surface layer exchange coefficients.
 #      (sf_urban_physics=1)
 
-AKANDA_URBAN:  1.29, 1.29, 1.29, 1.29, 1.29, 1.29, 1.29, 1.29, 1.29, 1.29
+AKANDA_URBAN:  1.29 1.29 1.29 1.29 1.29 1.29 1.29 1.29 1.29 1.29
 
 #
 # DDZR:  Thickness of each roof layer [ m ]
@@ -342,18 +342,25 @@ Z0G: 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01
 Z0R: 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01
 
 #
+# TRLEND:  Lower boundary condition for roof temperature [ K ]
+#      (sf_urban_physics=1,2,3)
+#
+
+TRLEND: 293.15, 293.15, 293.15, 293.15, 293.15, 293.15, 293.15, 293.15, 293.15, 293.15
+
+#
 # TBLEND:  Lower boundary temperature for building wall temperature [ K ]
 #      (sf_urban_physics=1,2,3)
 #
 
-TBLEND: 293.00, 293.00, 293.00, 293.00, 293.00, 293.00, 293.00, 293.00, 293.00, 293.00
+TBLEND: 293.15, 293.15, 293.15, 293.15, 293.15, 293.15, 293.15, 293.15, 293.15, 293.15
 
 #
 # TGLEND:  Lower boundary temperature for ground (road) temperature [ K ]
 #      (sf_urban_physics=1,2,3)
 #
 
-TGLEND: 293.00, 293.00, 293.00, 293.00, 293.00, 293.00, 293.00, 293.00, 293.00, 293.00
+TGLEND: 283.15, 283.15, 283.15, 283.15, 283.15, 283.15, 283.15, 283.15, 283.15, 283.15
 
 #
 # COP:  Coefficient of performance of the A/C systems [ - ]
@@ -361,6 +368,19 @@ TGLEND: 293.00, 293.00, 293.00, 293.00, 293.00, 293.00, 293.00, 293.00, 293.00, 
 #
 
 COP: 3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5 
+
+#
+# BLDAC_FRC: fraction of buildings installed with A/C systems [ - ] 
+#      (sf_urban_physics=3)
+#
+
+BLDAC_FRC: 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00
+
+#
+# COOLED_FRC: fraction of cooled floor area in buildings [ - ]
+#      (sf_urban_physics=3)
+#
+COOLED_FRC: 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0
 
 #
 # PWIN:  Coverage area fraction of windows in the walls of the building [ - ]
@@ -388,21 +408,21 @@ SW_COND: 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
 #      (sf_urban_physics=3)
 #
 
-TIME_ON: 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
+TIME_ON: 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.
 
 #
 # TIME_OFF:  End local time of A/C systems, [ h ]
 #      (sf_urban_physics=3)
 #
 
-TIME_OFF: 24.0, 24.0, 24.0, 24.0, 24.0, 24.0, 24.0, 24.0, 24.0, 24.0 
+TIME_OFF: 24., 24., 24., 24., 24., 24., 24., 24., 24., 24.
 
 #
 # TARGTEMP:  Target Temperature of the A/C systems, [ K ]
 #      (sf_urban_physics=3)
 #
 
-TARGTEMP: 298.0, 298.0, 298.0, 298.0, 298.0, 298.0, 298.0, 298.0, 298.0, 298.0 
+TARGTEMP: 298.15, 298.15, 298.15, 298.15, 298.15, 298.15, 298.15, 298.15, 298.15, 298.15
 
 #
 # GAPTEMP:  Comfort Range of the indoor Temperature, [ K ]

@@ -3642,7 +3642,7 @@ SUBROUTINE lsm_mosaic(DZ8W,QV3D,P8W3D,T3D,TSK,                      &
                 !  UTYPE_URB = UTYPE_URB2D(I,J) !urban type (low, high or industrial, or local climate zones 1-10)
                 !  this need to be changed in the mosaic danli
       
-                IF(IVGTYP(I,J)==ISURBAN) UTYPE_URB=2
+                IF(IVGTYP(I,J)==ISURBAN) UTYPE_URB=6
                 IF(IVGTYP(I,J)==URBAN_ZONE_1) UTYPE_URB=1
                 IF(IVGTYP(I,J)==URBAN_ZONE_2) UTYPE_URB=2
                 IF(IVGTYP(I,J)==URBAN_ZONE_3) UTYPE_URB=3
