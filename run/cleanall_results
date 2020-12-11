@@ -1,0 +1,77 @@
+#!/bin/bash
+
+# Remove Output files
+echo Listing WRF output files:
+ls wrfout_* 
+read -p "Remove output files (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+        echo Yes
+        echo rm wrfout_*
+        rm wrfout_*
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
+# Remove restart files
+echo Listing WRF restart files:
+ls wrfrst_*
+read -p "Remove restart files (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+	echo Yes
+	echo rm wrfrst_*
+	rm wrfrst_*
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
+# Remove log files
+echo Listing WRF log files:
+ls rsl.*
+read -p "Remove log files (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+        echo Yes
+        echo rm rsl.*
+	rm rsl.*
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
+# Remove WRF Input files
+echo Listing WRF input files:
+ls wrfbdy_* wrfinput_*
+read -p "Remove input files (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+        echo Yes
+        echo rm wrfbdy_* wrfinput_*
+        rm wrfbdy_* wrfinput_*
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
+# Remove met_em files
+echo Listing met_em files:
+ls met_em*
+read -p "Remove met_em files (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+        echo Yes
+        echo rm met_em.*
+        rm met_em.*
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
