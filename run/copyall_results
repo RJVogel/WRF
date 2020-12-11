@@ -17,35 +17,45 @@ case ${answer:0:1} in
     ;;
 esac
 
-# Remove or move restart files
-echo Listing WRF restart files:
-ls wrfrst_*
-read -p "Move (m/Enter) or remove (r) restart files? " answer
-case ${answer:0:2} in
-    m|M|"" )
-	echo Move
-	echo mv wrfrst_* $RESULTSPATH
-	mv wrfrst_* $RESULTSPATH
-    ;;
-    r|R )
-        echo Remove
-	echo rm wrfrst_*
-	rm wrfrst_*
+# Copy Output files
+echo Listing WRF output files:
+ls wrfout_* 
+read -p "Copy output files (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+        echo Yes
+        echo cp wrfout_* $RESULTSPATH
+        cp wrfout_* $RESULTSPATH
     ;;
     * )
         echo No
     ;;
 esac
 
-# Move Log files
+# Copy restart files
+echo Listing WRF restart files:
+ls wrfrst_*
+read -p "Copy restart files (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+	echo Yes
+	echo cp wrfrst_* $RESULTSPATH
+	cp wrfrst_* $RESULTSPATH
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
+# Copy Log files
 echo Listing WRF log files:
 ls rsl.*
-read -p "Move log files (y/Enter)? " answer
+read -p "Copy log files (y/Enter)? " answer
 case ${answer:0:1} in
     y|Y|"" )
         echo Yes
-        echo mv rsl.* $RESULTSPATH
-	mv rsl.* $RESULTSPATH
+        echo cp rsl.* $RESULTSPATH
+	cp rsl.* $RESULTSPATH
     ;;
     * )
         echo No
@@ -67,15 +77,15 @@ case ${answer:0:1} in
     ;;
 esac
 
-# Move Input/Output files
-echo Listing WRF input and output files:
-ls wrfbdy_* wrfinput_* wrfout_* 
-read -p "Move input and output files (y/Enter)? " answer
+# Copy WRF Input files
+echo Listing WRF input files:
+ls wrfbdy_* wrfinput_*
+read -p "Copy input files (y/Enter)? " answer
 case ${answer:0:1} in
     y|Y|"" )
         echo Yes
-        echo mv wrfbdy_* wrfinput_* wrfout_* $RESULTSPATH
-        mv wrfbdy_* wrfinput_* wrfout_* $RESULTSPATH
+        echo cp wrfbdy_* wrfinput_* $RESULTSPATH
+        cp wrfbdy_* wrfinput_* $RESULTSPATH
     ;;
     * )
         echo No
@@ -106,21 +116,6 @@ case ${answer:0:1} in
         echo Yes
         echo cp namelist.input ../../WPS/namelist.wps $RESULTSPATH
         cp namelist.input ../../WPS/namelist.wps $RESULTSPATH
-    ;;
-    * )
-        echo No
-    ;;
-esac
-
-# Remove met_em links
-echo Listing met_em links:
-ls met_em*
-read -p "Remove met_em links (y/Enter)? " answer
-case ${answer:0:1} in
-    y|Y|"" )
-        echo Yes
-        echo rm met_em.*
-        rm met_em.*
     ;;
     * )
         echo No
