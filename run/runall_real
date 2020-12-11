@@ -2,8 +2,8 @@
 
 set -x # echo on
 
-# Link metgrid files into directory
-ln -sf ../../WPS/met_em* .
+# Copy metgrid files into directory
+cp ../../WPS/met_em* .
 
 # Run real
 mpirun -np 1 ./real.exe&

@@ -48,7 +48,7 @@
 
  &physics
  physics_suite                       = 'CONUS'
- mp_physics                          =  2,     2,     2,
+ mp_physics                          =  4,     4,     4,
  cu_physics                          =  1,     0,     0,
  ra_lw_physics                       =  1,     1,     1,
  ra_sw_physics                       =  1,     1,     1,
@@ -59,7 +59,7 @@
  bldt                                =  0,     0,     0,
  cudt                                =  5,     5,     5,
  icloud                              =  1,
- num_land_cat                        = 33,
+ num_land_cat                        = 40,
  sf_urban_physics                    =  0,     0,     1,
  sf_surface_mosaic                   =  0,
  /

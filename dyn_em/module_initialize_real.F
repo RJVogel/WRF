@@ -2994,14 +2994,14 @@ integer::oops1,oops2
               !        ( grid%ivgtyp(i,j).NE.1  .AND. grid%ivgtyp(i,j).NE.31 .AND. grid%ivgtyp(i,j).NE.32 .AND. grid%ivgtyp(i,j).NE.33)) grid%ivgtyp(i,j)=1
               !ENDIF
 
-              !IF ( grid%FRC_URB2D(i,j) == 0. ) THEN
-              !   IF ( MMINLU == 'NLCD40' .AND. &
-              !     (grid%ivgtyp(i,j)==24 .OR. grid%ivgtyp(i,j)==25 .OR. grid%ivgtyp(i,j)==26 .OR. grid%ivgtyp(i,j)==13) ) grid%FRC_URB2D(i,j) = 0.1
-              !   IF ( MMINLU == 'MODIFIED_IGBP_MODIS_NOAH' .AND. &
-              !     (grid%ivgtyp(i,j)==31 .OR. grid%ivgtyp(i,j)==32 .OR. grid%ivgtyp(i,j)==33 .OR. grid%ivgtyp(i,j)==13) ) grid%FRC_URB2D(i,j) = 0.1
-              !   IF ( MMINLU == 'USGS' .AND. &
-              !     (grid%ivgtyp(i,j)==31 .OR. grid%ivgtyp(i,j)==32 .OR. grid%ivgtyp(i,j)==33 .OR. grid%ivgtyp(i,j)==1 ) ) grid%FRC_URB2D(i,j) = 0.1
-              !ENDIF
+              IF ( grid%FRC_URB2D(i,j) .LE. 0.01 ) THEN
+                 IF ( MMINLU == 'NLCD40' .AND. &
+                   (grid%ivgtyp(i,j)==24 .OR. grid%ivgtyp(i,j)==25 .OR. grid%ivgtyp(i,j)==26 .OR. grid%ivgtyp(i,j)==13) ) grid%FRC_URB2D(i,j) = 0.1
+                 IF ( MMINLU == 'MODIFIED_IGBP_MODIS_NOAH' .AND. &
+                   (grid%ivgtyp(i,j)==31 .OR. grid%ivgtyp(i,j)==32 .OR. grid%ivgtyp(i,j)==33 .OR. grid%ivgtyp(i,j)==13) ) grid%FRC_URB2D(i,j) = 0.1
+                 IF ( MMINLU == 'USGS' .AND. &
+                   (grid%ivgtyp(i,j)==31 .OR. grid%ivgtyp(i,j)==32 .OR. grid%ivgtyp(i,j)==33 .OR. grid%ivgtyp(i,j)==1 ) ) grid%FRC_URB2D(i,j) = 0.1
+              ENDIF
                IF ( skip_middle_points_t ( ids , ide , jds , jde , i , j , em_width , hold_ups ) ) CYCLE 
                grid%LP_URB2D(i,j)  = grid%URB_PARAM(i,91,j)
                grid%LB_URB2D(i,j)  = grid%URB_PARAM(i,95,j)
