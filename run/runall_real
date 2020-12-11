@@ -2,8 +2,20 @@
 
 set -x # echo on
 
-# Link metgrid files into directory
-cp ../../WPS/met_em* .
+# Copy metgrid files into directory
+echo Listing WPS metgrid files:
+ls ../../WPS/met_em* 
+read -p "Copy metgrid files (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+        echo Yes
+        echo cp ../../WPS/met_em* .
+        cp ../../WPS/met_em* .
+    ;;
+    * )
+        echo No
+    ;;
+esac
 
 # Run real
 mpirun -np 1 ./real.exe&
