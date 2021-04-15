@@ -1,9 +1,26 @@
 #!/bin/bash
 
-set -x # echo on
+# set -x # echo on
 
 # Copy metgrid files into directory
-cp ../../WPS/met_em* .
+echo Listing WPS metgrid files:
+ls ../../WPS/met_em* 
+read -p "Copy (c) or link (l) metgrid files? " answer
+case ${answer:0:2} in
+    c )
+        echo Copy
+        echo cp ../../WPS/met_em* .
+        cp ../../WPS/met_em* .
+    ;;
+    l )
+        echo Link
+        echo ln -sf ../../WPS/met_em* .
+        ln -sf ../../WPS/met_em* .
+    ;;
+    * )
+        echo None of the above
+    ;;
+esac
 
 # Run real
 mpirun -np 1 ./real.exe&
@@ -12,4 +29,4 @@ mpirun -np 1 ./real.exe&
 sleep 1
 tail -f rsl.out.0000
 
-set +x # echo off
+# set +x # echo off

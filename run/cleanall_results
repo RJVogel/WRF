@@ -47,13 +47,13 @@ esac
 
 # Remove WRF Input files
 echo Listing WRF input files:
-ls wrfbdy_* wrfinput_*
+ls wrfbdy_* wrfinput_* wrflowinp_*
 read -p "Remove input files (y/Enter)? " answer
 case ${answer:0:1} in
     y|Y|"" )
         echo Yes
-        echo rm wrfbdy_* wrfinput_*
-        rm wrfbdy_* wrfinput_*
+        echo rm wrfbdy_* wrfinput_* wrflowinp_*
+        rm wrfbdy_* wrfinput_* wrflowinp_*
     ;;
     * )
         echo No

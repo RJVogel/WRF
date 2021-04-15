@@ -11,7 +11,7 @@
  end_month                           = 07,   07,   07,
  end_day                             = 04,   04,   04,
  end_hour                            = 00,   00,   00,
- interval_seconds                    = 21600
+ interval_seconds                    = 3600  ! 21600
  input_from_file                     = .true.,.true.,.true.,
  history_interval                    =   60,    60,   60,
  frames_per_outfile                  = 1000,  1000, 1000,
@@ -32,7 +32,7 @@
  e_sn                                = 120,  156,   112,
  e_vert                              = 35,    35,    35,
  p_top_requested                     = 5000,
- num_metgrid_levels                  = 27,
+ num_metgrid_levels                  = 38,
  num_metgrid_soil_levels             = 4,
  dx                                  = 15000, 3000,  1000,
  dy                                  = 15000, 3000,  1000,
@@ -49,18 +49,18 @@
  &physics
  physics_suite                       = 'CONUS'
  mp_physics                          =  4,     4,     4,
- cu_physics                          =  1,     0,     0,
- ra_lw_physics                       =  1,     1,     1,
- ra_sw_physics                       =  1,     1,     1,
- bl_pbl_physics                      =  8,     8,     8,
- sf_sfclay_physics                   =  2,     2,     2,
+ cu_physics                          =  1,     0,     0,  ! dx > 10 km (dx > 3 km grey zone)
+ ra_lw_physics                       =  4,     4,     4,
+ ra_sw_physics                       =  4,     4,     4,
+ bl_pbl_physics                      =  0,     0,     0,
+ sf_sfclay_physics                   =  1,     1,     1,
  sf_surface_physics                  =  4,     4,     4,
- radt                                = 15,    15,    15,
+ radt                                =  6,     6,     6,  ! ~ 1 min per km, same for all 2-way nests, >=5
  bldt                                =  0,     0,     0,
  cudt                                =  5,     5,     5,
  icloud                              =  1,
- num_land_cat                        = 21,
- sf_urban_physics                    =  0,     0,     0,
+ num_land_cat                        = 40,
+ sf_urban_physics                    =  0,     0,     1,
  sf_surface_mosaic                   =  0,
  /
 
@@ -68,10 +68,10 @@
  /
 
  &dynamics
- hybrid_opt                          = 2, 
+ hybrid_opt                          = 2,
  w_damping                           = 0,
- diff_opt                            = 1,      1,      1,
- km_opt                              = 4,      4,      4,
+ diff_opt                            = 2,      2,      2,
+ km_opt                              = 5,      5,      5,
  diff_6th_opt                        = 0,      0,      0,
  diff_6th_factor                     = 0.12,   0.12,   0.12,
  base_temp                           = 290.
@@ -83,7 +83,7 @@
  non_hydrostatic                     = .true., .true., .true.,
  moist_adv_opt                       = 1,      1,      1,     
  scalar_adv_opt                      = 1,      1,      1,     
- gwd_opt                             = 1,      1,      0,
+ gwd_opt                             = 1,      0,      0,  ! gravity wave drag; for coarse grids > 5 km
  /
 
  &bdy_control
