@@ -62,21 +62,6 @@ case ${answer:0:1} in
     ;;
 esac
 
-# Copy geo_em files
-echo Listing geo_em files:
-ls ../../WPS/geo_em*
-read -p "Copy geo_em files (y/Enter)? " answer
-case ${answer:0:1} in
-    y|Y|"" )
-        echo Yes
-        echo cp ../WPS/geo_em* $RESULTSPATH
-        cp ../../WPS/geo_em* $RESULTSPATH
-    ;;
-    * )
-        echo No
-    ;;
-esac
-
 # Copy WRF Input files
 echo Listing WRF input files:
 ls wrfbdy_* wrfinput_*
@@ -94,13 +79,13 @@ esac
 
 # Copy Tables
 echo Listing tables:
-ls GENPARM.TBL SOILPARM.TBL VEGPARM.TBL LANDUSE.TBL MPTABLE.TBL URBPARM.TBL ../../WPS/geogrid/GEOGRID.TBL
+ls GENPARM.TBL SOILPARM.TBL VEGPARM.TBL LANDUSE.TBL MPTABLE.TBL URBPARM.TBL
 read -p "Copy tables (y/Enter)? " answer
 case ${answer:0:1} in
     y|Y|"" )
         echo Yes
-        echo cp GENPARM.TBL SOILPARM.TBL VEGPARM.TBL LANDUSE.TBL MPTABLE.TBL URBPARM.TBL ../../WPS/geogrid/GEOGRID.TBL $RESULTSPATH
-        cp GENPARM.TBL SOILPARM.TBL VEGPARM.TBL LANDUSE.TBL MPTABLE.TBL URBPARM.TBL ../../WPS/geogrid/GEOGRID.TBL $RESULTSPATH
+        echo cp GENPARM.TBL SOILPARM.TBL VEGPARM.TBL LANDUSE.TBL MPTABLE.TBL URBPARM.TBL $RESULTSPATH
+        cp GENPARM.TBL SOILPARM.TBL VEGPARM.TBL LANDUSE.TBL MPTABLE.TBL URBPARM.TBL $RESULTSPATH
     ;;
     * )
         echo No
@@ -109,13 +94,13 @@ esac
 
 # Copy namelist files
 echo Listing namelist files:
-ls namelist.input ../../WPS/namelist.wps
+ls namelist.input
 read -p "Copy namelist files (y/Enter)? " answer
 case ${answer:0:1} in
     y|Y|"" )
         echo Yes
-        echo cp namelist.input ../../WPS/namelist.wps $RESULTSPATH
-        cp namelist.input ../../WPS/namelist.wps $RESULTSPATH
+        echo cp namelist.input $RESULTSPATH
+        cp namelist.input $RESULTSPATH
     ;;
     * )
         echo No

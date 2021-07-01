@@ -374,7 +374,7 @@ COP: 3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5
 #      (sf_urban_physics=3)
 #
 
-BLDAC_FRC: 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00
+BLDAC_FRC: 0.50, 0.50, 0.02, 0.02, 0.02, 0.02, 0.00, 0.02, 0.00, 0.50
 
 #
 # COOLED_FRC: fraction of cooled floor area in buildings [ - ]

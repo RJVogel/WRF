@@ -49,13 +49,13 @@
  &physics
  physics_suite                       = 'CONUS'
  mp_physics                          =  4,     4,     4,
- cu_physics                          =  1,     0,     0,
+ cu_physics                          =  1,     0,     0,  ! dx > 10 km (dx > 3 km grey zone)
  ra_lw_physics                       =  1,     1,     1,
  ra_sw_physics                       =  1,     1,     1,
  bl_pbl_physics                      =  8,     8,     8,
  sf_sfclay_physics                   =  2,     2,     2,
  sf_surface_physics                  =  4,     4,     4,
- radt                                = 15,    15,    15,
+ radt                                =  9,     9,     9,  ! ~ 1 min per km, same for all 2-way nests, >=5
  bldt                                =  0,     0,     0,
  cudt                                =  5,     5,     5,
  icloud                              =  1,
@@ -83,7 +83,7 @@
  non_hydrostatic                     = .true., .true., .true.,
  moist_adv_opt                       = 1,      1,      1,     
  scalar_adv_opt                      = 1,      1,      1,     
- gwd_opt                             = 1,      1,      0,
+ gwd_opt                             = 1,      0,      0,  ! gravity wave drag; for coarse grids > 5 km
  /
 
  &bdy_control
