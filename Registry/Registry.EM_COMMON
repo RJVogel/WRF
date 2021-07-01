@@ -326,13 +326,13 @@ i1       real   mu_tend         ij     dyn_em      1          -
 i1       real   mu_tendf        ij     dyn_em      1          -     
 
 #diagnostic for looking at nest position in output. A mungy version of terrain height.
-state    real   nest_pos        ij     misc        1   -   rhu=(mark_domain)  "NEST_POS"
+state    real   nest_pos        ij     misc        1   -   irhu=(mark_domain)  "NEST_POS"
 state    real   nest_mask       ij     misc        1   -   ru=(mark_domain)   "NEST_MASK"     "LOCATION OF NEST IF ANY"
 state    real   ht_coarse       ij     misc        1   -     r                -              "STORAGE FOR LOW-RES TERRAIN"
 
 
 # TKE
-state    real   tke            ikj     dyn_em      2         -       r        "tke"          "TURBULENCE KINETIC ENERGY"     "m2 s-2"
+state    real   tke            ikj     dyn_em      2         -       rh        "tke"          "TURBULENCE KINETIC ENERGY"     "m2 s-2"
 i1       real   tke_tend       ikj     dyn_em      1         -      
 
 # variables in 3DTKE scheme (km_opt=5)
