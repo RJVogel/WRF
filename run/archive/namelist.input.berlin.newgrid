@@ -27,55 +27,53 @@
  /
 
  &domains
- time_step                           = 90,
+ time_step                           = 30,
  time_step_fract_num                 = 0,
  time_step_fract_den                 = 1,
- max_dom                             = 3,
- e_we                                = 120,  156,   112,
- e_sn                                = 120,  156,   112,
- e_vert                              = 35,    35,    35,
- p_top_requested                     = 5000,
+ max_dom                             = 2,
+ e_we                                = 201,  201,   201,
+ e_sn                                = 201,  201,   201,
+ e_vert                              = 45,    45,    45,
+ p_top_requested                     = 5000.,  ! 5474.765,
  num_metgrid_levels                  = 38,
  num_metgrid_soil_levels             = 4,
- dx                                  = 15000, 3000,  1000,
- dy                                  = 15000, 3000,  1000,
+ dx                                  = 5000, 1000,  200,
+ dy                                  = 5000, 1000,  200,
  grid_id                             = 1,     2,     3,
  parent_id                           = 0,     1,     2,
- i_parent_start                      = 1,     45,    60,
- j_parent_start                      = 1,     45,    60,
- parent_grid_ratio                   = 1,     5,     3,
- parent_time_step_ratio              = 1,     5,     3,
+ i_parent_start                      = 1,     81,    56,
+ j_parent_start                      = 1,     81,    56,
+ parent_grid_ratio                   = 1,     5,     5,
+ parent_time_step_ratio              = 1,     5,     5,
  feedback                            = 1,
  smooth_option                       = 0
  /
 
  &physics
- mp_physics                          =  4,     4,     4,
- cu_physics                          =  1,     0,     0,  ! dx > 10 km (dx > 3 km grey zone)
- ra_lw_physics                       =  4,     4,     4,
- ra_sw_physics                       =  4,     4,     4,
- bl_pbl_physics                      = 11,    11,    11,
- sf_sfclay_physics                   =  1,     1,     1,
- sf_surface_physics                  =  4,     4,     4,
- radt                                =  6,     6,     6,  ! ~ 1 min per km, same for all 2-way nests, >=5
- bldt                                =  0,     0,     0,
- cudt                                =  5,     5,     5,
+ mp_physics                          =  4,   4,   4,
+ cu_physics                          =  0,   0,   0,  ! dx > 10 km (dx > 3 km grey zone)
+ ra_lw_physics                       =  4,   4,   4,
+ ra_sw_physics                       =  4,   4,   4,
+ bl_pbl_physics                      =  0,   0,   0,
+ sf_sfclay_physics                   =  1,   1,   1,
+ sf_surface_physics                  =  4,   4,   4,
+ radt                                =  5,   5,   5,  ! ~ 1 min per km, same for all 2-way nests, >=5
+ bldt                                =  0,   0,   0,
+ cudt                                =  5,   5,   5,
  icloud                              =  1,
+! cu_rad_feedback (max_dom)           = .true., .true., .true.,
  num_land_cat                        = 40,
- sf_urban_physics                    =  0,     0,     1,
+ sf_urban_physics                    =  0,     1,     1,
  sf_surface_mosaic                   =  0,
  sst_update                          =  1,
  usemonalb                           = .true.,           ! recommended for sst_update
  /
 
- &fdda
- /
-
  &dynamics
  hybrid_opt                          = 2,
  w_damping                           = 0,
- diff_opt                            = 1,      1,      1,
- km_opt                              = 4,      4,      4,
+ diff_opt                            = 2,      2,      2,
+ km_opt                              = 5,      5,      5,
  diff_6th_opt                        = 0,      0,      0,
  diff_6th_factor                     = 0.12,   0.12,   0.12,
  base_temp                           = 290.
@@ -92,10 +90,8 @@
 
  &bdy_control
  spec_bdy_width                      = 5,
+ relax_zone                          = 4,
  specified                           = .true.
- /
-
- &grib2
  /
 
  &namelist_quilt
