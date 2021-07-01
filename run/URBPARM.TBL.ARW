@@ -21,32 +21,34 @@ Number of urban categories: 3
 # ZR:  Roof level (building height)  [ m ]
 #      (sf_urban_physics=1)
 
-ZR: 11.3,  19.9,  12.7
+ZR: 5.0,  7.5,  10.0
+
 #
 # SIGMA_ZED:  Standard Deviation of roof height  [ m ]
 #      (sf_urban_physics=1)
 
-SIGMA_ZED: 7.5,  7.3,  8.3
+SIGMA_ZED: 1.0,  3.0,  4.0
 
 #
 # ROOF_WIDTH:  Roof (i.e., building) width  [ m ]
 #      (sf_urban_physics=1)
 
-ROOF_WIDTH: 13.2, 19.8, 25.2
+ROOF_WIDTH: 8.3, 9.4, 10.0
 
 #
 # ROAD_WIDTH:  road width  [ m ]
 #      (sf_urban_physics=1)
 #
 
-ROAD_WIDTH: 17.6, 12.4, 27.4
+ROAD_WIDTH: 8.3, 9.4, 10.0
 
 #
 # AH:  Anthropogenic heat [ W m{-2} ]
 #      (sf_urban_physics=1)
 #
 
-AH:  46.8, 46.8, 46.8  ! 30.0, 71.4, 26.9
+AH:  20.0, 50.0, 90.0
+
 
 #
 # ALH:  Anthropogenic latent heat [ W m{-2} ]
@@ -60,7 +62,7 @@ ALH:  20.0, 25.0, 40.0
 #  surface layer exchange coefficients.
 #      (sf_urban_physics=1)
 
-AKANDA_URBAN:  1.29, 1.29, 1.29
+AKANDA_URBAN:  1.29 1.29 1.29
 
 #
 # DDZR:  Thickness of each roof layer [ m ]
@@ -69,7 +71,7 @@ AKANDA_URBAN:  1.29, 1.29, 1.29
 #      (sf_urban_physics=1)
 
 
-DDZR:  0.05, 0.05, 0.10, 0.20
+DDZR:  0.05, 0.05, 0.05, 0.05
 
 #
 # DDZB:  Thickness of each building wall layer [ m ]
@@ -78,7 +80,7 @@ DDZR:  0.05, 0.05, 0.10, 0.20
 #      (sf_urban_physics=1)
 #
 
-DDZB: 0.05, 0.05, 0.10, 0.20
+DDZB: 0.05, 0.05, 0.05, 0.05
 
 #
 # DDZG:  Thickness of each ground (road) layer [ m ]
@@ -129,7 +131,7 @@ TS_SCHEME: 1
 #      (sf_urban_physics=1)
 #
 
-AHOPTION: 1
+AHOPTION: 0
 
 #
 # Anthropogenic Heating diurnal profile.
@@ -140,7 +142,7 @@ AHOPTION: 1
 #      (sf_urban_physics=1)
 #
 
-AHDIUPRF: 0.19 0.27 0.40 0.53 0.67 0.79 0.89 0.94 0.99 0.99 0.99 1.00 0.95 0.90 0.80 0.72 0.65 0.58 0.51 0.43 0.36 0.30 0.24 0.19
+AHDIUPRF: 0.16 0.13 0.08 0.07 0.08 0.26 0.67 0.99 0.89 0.79 0.74 0.73 0.75 0.76 0.82 0.90 1.00 0.95 0.68 0.61 0.53 0.35 0.21 0.18
 
 #
 # ALHOPTION [ 0: No anthropogenic latent heat,  1: Anthropogenic heating will be added to latent heat flux term ]
@@ -231,49 +233,49 @@ DZGR:  0.05 0.10 0.15 0.20
 #      (sf_urban_physics=1,2,3)
 #
 
-FRC_URB: 0.45, 0.86, 0.75
+FRC_URB: 0.5, 0.9, 0.95
 
 #
 # CAPR:  Heat capacity of roof  [ J m{-3} K{-1} ]
 #      (sf_urban_physics=1,2,3)
 #
 
-CAPR: 2.3E6, 2.3E6, 2.3E6,
+CAPR: 1.0E6, 1.0E6, 1.0E6,
 
 #
 # CAPB:  Heat capacity of building wall [ J m{-3} K{-1} ]
 #      (sf_urban_physics=1,2,3)
 #
 
-CAPB: 2.3E6, 2.3E6, 2.3E6,
+CAPB: 1.0E6, 1.0E6, 1.0E6,
 
 #
 # CAPG:  Heat capacity of ground (road) [ J m{-3} K{-1} ]
 #      (sf_urban_physics=1,2,3)
 #
 
-CAPG:  2.3E6, 2.3E6, 2.3E6,
+CAPG:  1.4E6, 1.4E6, 1.4E6,
 
 #
 # AKSR:  Thermal conductivity of roof [ J m{-1} s{-1} K{-1} ]
 #      (sf_urban_physics=1,2,3)
 #
 
-AKSR:  1.54, 1.54, 1.54,
+AKSR:  0.67, 0.67, 0.67,
 
 #
 # AKSB:  Thermal conductivity of building wall [ J m{-1} s{-1} K{-1} ]
 #      (sf_urban_physics=1,2,3)
 #
 
-AKSB:  1.54, 1.54, 1.54,
+AKSB:  0.67, 0.67, 0.67,
 
 #
 # AKSG:  Thermal conductivity of ground (road) [ J m{-1} s{-1} K{-1} ]
 #      (sf_urban_physics=1,2,3)
 #
 
-AKSG: 0.67, 0.67, 0.67,
+AKSG: 0.4004, 0.4004, 0.4004,
 
 #
 # ALBR:   Surface albedo of roof [ fraction ]
@@ -294,7 +296,7 @@ ALBB: 0.20, 0.20, 0.20
 #      (sf_urban_physics=1,2,3)
 #
 
-ALBG: 0.15, 0.15, 0.15
+ALBG: 0.20, 0.20, 0.20
 
 #
 # EPSR:  Surface emissivity of roof [ - ]
@@ -345,21 +347,21 @@ Z0R: 0.01, 0.01, 0.01
 #      (sf_urban_physics=1,2,3)
 #
 
-TRLEND: 293.15, 293.15, 293.15
+TRLEND: 293.00, 293.00, 293.00
 
 #
 # TBLEND:  Lower boundary temperature for building wall temperature [ K ]
 #      (sf_urban_physics=1,2,3)
 #
 
-TBLEND: 293.15, 293.15, 293.15
+TBLEND: 293.00, 293.00, 293.00
 
 #
 # TGLEND:  Lower boundary temperature for ground (road) temperature [ K ]
 #      (sf_urban_physics=1,2,3)
 #
 
-TGLEND: 283.15, 283.15, 283.15
+TGLEND: 293.00, 293.00, 293.00
 
 #
 # COP:  Coefficient of performance of the A/C systems [ - ]
@@ -373,7 +375,7 @@ COP: 3.5, 3.5, 3.5
 #      (sf_urban_physics=3)
 #
 
-BLDAC_FRC: 0.01, 0.02, 0.5
+BLDAC_FRC: 1.0, 1.0, 1.0
 
 #
 # COOLED_FRC: fraction of cooled floor area in buildings [ - ]
@@ -421,7 +423,7 @@ TIME_OFF: 24., 24., 24.
 #      (sf_urban_physics=3)
 #
 
-TARGTEMP: 298.15, 298.15, 297.15
+TARGTEMP: 298., 298., 297.
 
 #
 # GAPTEMP:  Comfort Range of the indoor Temperature, [ K ]
@@ -511,12 +513,12 @@ STREET PARAMETERS:
 # category  direction     width      width
 # [index]  [deg from N]    [m]        [m]
 
-    1         0.0          17.6       13.2
-    1        90.0          17.6       13.2
-    2         0.0          12.4       19.8
-    2        90.0          12.4       19.8
-    3         0.0          27.4       25.2
-    3        90.0          27.4       25.2
+    1         0.0          30.       13.
+    1        90.0          30.       13.
+    2         0.0          25.       17.
+    2        90.0          25.       17.
+    3         0.0          20.       20.
+    3        90.0          20.       20.
 
 END STREET PARAMETERS
 
@@ -525,13 +527,9 @@ BUILDING HEIGHTS: 1
 
 #     height   Percentage
 #      [m]       [%]
-       5.0      37.0
-      10.0      25.0
-      15.0      18.0
-      20.0      14.0
-      25.0       4.0
-      30.0       1.0
-      35.0       1.0
+       5.0      15.0
+      10.0      70.0
+      15.0      15.0
 END BUILDING HEIGHTS
 
 BUILDING HEIGHTS: 2
@@ -539,13 +537,10 @@ BUILDING HEIGHTS: 2
 
 #     height   Percentage
 #      [m]       [%]
-       5.0        9.0
-      10.0        6.0
-      15.0        8.0
-      20.0       45.0
-      25.0       27.0
-      30.0        4.0
-      35.0        1.0
+       5.0        0.0
+      10.0       20.0
+      15.0       60.0
+      20.0       20.0
 END BUILDING HEIGHTS
 
 BUILDING HEIGHTS: 3
@@ -553,11 +548,11 @@ BUILDING HEIGHTS: 3
 
 #     height   Percentage
 #      [m]       [%]
-       5.0      27.0
-      10.0      35.0
-      15.0      17.0
-      20.0      11.0
-      25.0       6.0
-      30.0       3.0
-      35.0       1.0
+       5.0       0.0
+      10.0       0.0
+      15.0      10.0
+      20.0      25.0
+      25.0      40.0
+      30.0      25.0
+      35.0       0.0
 END BUILDING HEIGHTS
