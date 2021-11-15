@@ -84,8 +84,8 @@ read -p "Copy tables (y/Enter)? " answer
 case ${answer:0:1} in
     y|Y|"" )
         echo Yes
-        echo cp GENPARM.TBL SOILPARM.TBL VEGPARM.TBL LANDUSE.TBL MPTABLE.TBL URBPARM.TBL $RESULTSPATH
-        cp GENPARM.TBL SOILPARM.TBL VEGPARM.TBL LANDUSE.TBL MPTABLE.TBL URBPARM.TBL $RESULTSPATH
+        echo cp GENPARM.TBL SOILPARM.TBL VEGPARM.TBL LANDUSE.TBL MPTABLE.TBL URBPARM.TBL URBPARM_LCZ.TBL $RESULTSPATH
+        cp GENPARM.TBL SOILPARM.TBL VEGPARM.TBL LANDUSE.TBL MPTABLE.TBL URBPARM.TBL URBPARM_LCZ.TBL $RESULTSPATH
     ;;
     * )
         echo No
@@ -124,13 +124,13 @@ esac
 
 # Copy WPS Tables
 echo Listing tables:
-ls ../../WPS/geogrid/GEOGRID.TBL
+ls ../../WPS/geogrid/GEOGRID.TBL ../../WPS/metgrid/METGRID.TBL ../../WPS/Vtable
 read -p "Copy tables (y/Enter)? " answer
 case ${answer:0:1} in
     y|Y|"" )
         echo Yes
-        echo cp ../../WPS/geogrid/GEOGRID.TBL $RESULTSPATH
-        cp ../../WPS/geogrid/GEOGRID.TBL $RESULTSPATH
+        echo cp ../../WPS/geogrid/GEOGRID.TBL ../../WPS/metgrid/METGRID.TBL ../../WPS/Vtable $RESULTSPATH
+        cp ../../WPS/geogrid/GEOGRID.TBL ../../WPS/metgrid/METGRID.TBL ../../WPS/Vtable $RESULTSPATH
     ;;
     * )
         echo No
