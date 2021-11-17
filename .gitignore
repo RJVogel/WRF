@@ -20,3 +20,4 @@ configure.wrf*
 met_em*
 rsl.*
 log.*
+run/archive/*
