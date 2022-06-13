@@ -1,0 +1,26 @@
+#-----------------------------------------------#
+# 24 characters for name | pfx |  LAT  |   LON  |
+#-----------------------------------------------#
+Alexanderplatz            d_alx 52.5198 13.4057
+Fernsehturm               d_ftm 52.5208 13.4094
+Tempelhof                 d_thf 52.4675 13.4021
+Tegel                     d_tgl 52.5644 13.3088
+Dahlem                    d_dlm 52.4537 13.3017
+Marzahn                   d_mrn 52.5447 13.5598
+Buch                      d_bch 52.6310 13.5021 
+Brandenburg               d_bbg 52.3807 13.5306
+Kaniswall                 d_kwl 52.4040 13.7309
+Potsdam                   d_pdm 52.3812 13.0622 
+Heckelberg                d_hbg 52.7461 13.8427
+Berge                     d_bge 52.6198 12.7867
+Muencheberg               d_mbg 52.5176 14.1232
+Zehdenick                 d_zdn 52.9664 13.3268
+Baruth                    d_brt 52.0614 13.4996
+Neuruppin                 d_nrp 52.9037 12.8072
+Lindenberg                d_lbg 52.2085 14.1180
+Angermuende               d_ang 53.0316 13.9908
+Menz                      d_mnz 53.1020 13.0421
+Falkenberg                d_fbg 52.1700 14.1200
+Greifswald                d_grw 54.0967 13.4056
+Bergen                    d_bgn 52.8152 9.9248
+

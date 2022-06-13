@@ -328,13 +328,13 @@ i1       real   mu_tend         ij     dyn_em      1          -
 i1       real   mu_tendf        ij     dyn_em      1          -     
 
 #diagnostic for looking at nest position in output. A mungy version of terrain height.
-state    real   nest_pos        ij     misc        1   -   irhu=(mark_domain)  "NEST_POS"
+state    real   nest_pos        ij     misc        1   -   rhu=(mark_domain)  "NEST_POS"
 state    real   nest_mask       ij     misc        1   -   ru=(mark_domain)   "NEST_MASK"     "LOCATION OF NEST IF ANY"
 state    real   ht_coarse       ij     misc        1   -     r                -              "STORAGE FOR LOW-RES TERRAIN"
 
 
 # TKE
-state    real   tke            ikj     dyn_em      2         -       rh        "tke"          "TURBULENCE KINETIC ENERGY"     "m2 s-2"
+state    real   tke            ikj     dyn_em      2         -       r        "tke"          "TURBULENCE KINETIC ENERGY"     "m2 s-2"
 i1       real   tke_tend       ikj     dyn_em      1         -      
 
 # variables in 3DTKE scheme (km_opt=5)
@@ -778,12 +778,12 @@ state   real   slp_azi             ij    misc          1     -     rdu     "SLP_
 state   real   shdmax              ij    misc          1     -     i012rhd=(interp_mask_field:lu_index,iswater)u=(copy_fcnm)   "SHDMAX"        "ANNUAL MAX VEG FRACTION" ""
 state   real   shdmin              ij    misc          1     -     i012rhd=(interp_mask_field:lu_index,iswater)u=(copy_fcnm)   "SHDMIN"        "ANNUAL MIN VEG FRACTION" ""
 state   real   snoalb              ij    misc          1     -     i012rhd  "SNOALB"        "ANNUAL MAX SNOW ALBEDO IN FRACTION" ""
-state   real   toposoil            ij    misc          1     -     i012     "SOILHGT"       "ELEVATION OF LSM DATA"  "m"
+state   real   toposoil            ij    misc          1     -     i12     "SOILHGT"       "ELEVATION OF LSM DATA"  "m"
 state   real   landusef            iuj   misc          1     Z     i012rdu   "LANDUSEF"      "LANDUSE FRACTION BY CATEGORY"  ""
 state   real   soilctop            isj   misc          1     Z     i012rdu   "SOILCTOP"      "SOIL CAT FRACTION (TOP)"  ""
 state   real   soilcbot            isj   misc          1     Z     i012rdu   "SOILCBOT"      "SOIL CAT FRACTION (BOTTOM)"  ""
-state   real   soilcat             ij    misc          1     -     i012     "SOILCAT"       "SOIL CAT DOMINANT TYPE" ""
-state   real   vegcat              ij    misc          1     -     i012     "VEGCAT"        "VEGETATION CAT DOMINANT TYPE" ""
+state   real   soilcat             ij    misc          1     -     i12     "SOILCAT"       "SOIL CAT DOMINANT TYPE" ""
+state   real   vegcat              ij    misc          1     -     i12     "VEGCAT"        "VEGETATION CAT DOMINANT TYPE" ""
 
 state   real   pct_pft_input i{npft}j    misc          1     Z     i012rh   "PCT_PFT"   "PFT PERCENTAGE BY CATEGORY"  ""
 state   real   irrigation          ij    misc          1     -     i012rdu "IRRIGATION"    "irrigated land percentage" ""
@@ -1936,14 +1936,14 @@ state    real  XLAND            ij      misc        1         -     i02rhd=(inte
 state    real  cplmask       i{ncpldom}j      misc        1       z        i0r     "CPLMASK"    "COUPLING MASK (0:VALUE FROM SST UPDATE; 1:VALUE FROM COUPLED OCEAN), vertical dim is number of external domains"  ""
 state    real  ZNT              ij      misc        1         -      i3r     "ZNT"                   "TIME-VARYING ROUGHNESS LENGTH"                "m"      
 state    real  CK               ij      misc        1         -      r        "CK"                    "ENTHALPY EXCHANGE COEFF AT 10 m"                      ""
-state    real  CKA              ij      misc        1         -      rh       "CKA"                   "ENTHALPY EXCHANGE COEFF AT LOWEST MODEL LVL"          ""
+state    real  CKA              ij      misc        1         -      r        "CKA"                   "ENTHALPY EXCHANGE COEFF AT LOWEST MODEL LVL"          ""
 state    real  CD               ij      misc        1         -      r        "CD"                    "DRAG COEFF AT 10m"                      ""
-state    real  CDA              ij      misc        1         -      rh       "CDA"                   "DRAG COEFF AT LOWEST MODEL LVL"         ""
+state    real  CDA              ij      misc        1         -      r        "CDA"                   "DRAG COEFF AT LOWEST MODEL LVL"         ""
 state    real  UST              ij      misc        1         -      rh       "UST"                   "U* IN SIMILARITY THEORY"                      "m s-1"      
 state    real  USTM             ij      misc        1         -      r        "USTM"                  "U* IN SIMILARITY THEORY WITHOUT VCONV"        "m s-1"
 i1       real  HOL              ij      misc        1         -      -        "HOL"                   "PBL HEIGHT OVER MONIN-OBUKHOV LENGTH"         ""
-state    real  RMOL             ij      misc        1         -      rh       "RMOL"                  "1./Monin Ob. Length"                      ""
-state    real  MOL              ij      misc        1         -      rh        "MOL"                   "T* IN SIMILARITY THEORY"                      "K"      
+state    real  RMOL             ij      misc        1         -      r        "RMOL"                  "1./Monin Ob. Length"                      ""
+state    real  MOL              ij      misc        1         -      r        "MOL"                   "T* IN SIMILARITY THEORY"                      "K"      
 state    real  PBLH             ij      misc        1         -      rh       "PBLH"                  "PBL HEIGHT"         "m"      
 state    real  CAPG             ij      misc        1         -      r        "CAPG"                  "HEAT CAPACITY FOR SOIL"                       "J K-1 m-3"      
 state    real  THC              ij      misc        1         -      r        "THC"                   "THERMAL INERTIA"                              "Cal cm-2 K-1 s-0.5"      

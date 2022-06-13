@@ -107,6 +107,21 @@ case ${answer:0:1} in
     ;;
 esac
 
+# Copy WRF tslist files
+echo Listing tslist files:
+ls tslist *.PH *.PR *.QV *.TH *.TS *.UU *.VV *.WW
+read -p "Copy tslist files (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+        echo Yes
+        echo cp tslist *.PH *.PR *.QV *.TH *.TS *.UU *.VV *.WW $RESULTSPATH
+        cp *.PH tslist *.PR *.QV *.TH *.TS *.UU *.VV *.WW $RESULTSPATH
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
 # Copy WPS log files
 echo Listing WPS log files:
 ls ../../WPS/log.geogrid ../../WPS/log.ungrib ../../WPS/log.metgrid
