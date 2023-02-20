@@ -1,12 +1,18 @@
 #!/bin/bash
 
+# Input argument
+NP=${1?Error: Number of processes for mpirun not given. Please append as number.}
+
+# Run without hangup
+# (echo l | nohup ./runall_real 16) &
+
 # Source libraries
-echo  source ./load_libraries
+echo -----------------------
+echo sourcing libraries: source ./load_libraries
 source ./load_libraries
 
-# set -x # echo on
-
-# Copy metgrid files into directory
+# Copying/linking metgrid files into directory
+echo --------------------------
 echo Listing WPS metgrid files:
 ls ../../WPS/met_em* 
 read -p "Copy (c) or link (l) metgrid files? " answer
@@ -27,10 +33,7 @@ case ${answer:0:2} in
 esac
 
 # Run real
-mpirun -np 1 ./real.exe&
+echo ------------------------
+echo running real: mpirun -np $NP ./real.exe
+mpirun -np $NP ./real.exe
 
-# Tail
-sleep 1
-tail -f rsl.out.0000
-
-# set +x # echo off

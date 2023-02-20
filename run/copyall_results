@@ -35,9 +35,9 @@ esac
 # Copy WRF restart files
 echo Listing WRF restart files:
 ls wrfrst_*
-read -p "Copy restart files (y)? " answer
+read -p "Copy restart files (y/Enter)? " answer
 case ${answer:0:1} in
-    y|Y )
+    y|Y|"" )
 	echo Yes
 	echo cp wrfrst_* $RESULTSPATH
 	cp wrfrst_* $RESULTSPATH
@@ -64,18 +64,34 @@ esac
 
 # Copy WRF input files
 echo Listing WRF input files:
-ls wrfbdy_* wrfinput_* wrflowinp_*
+ls wrfinput_*
 read -p "Copy input files (y/Enter)? " answer
 case ${answer:0:1} in
     y|Y|"" )
         echo Yes
-        echo cp wrfbdy_* wrfinput_* wrflowinp_* $RESULTSPATH
-        cp wrfbdy_* wrfinput_* wrflowinp_* $RESULTSPATH
+        echo cp wrfinput_* $RESULTSPATH
+        cp wrfinput_* $RESULTSPATH
     ;;
     * )
         echo No
     ;;
 esac
+
+# Copy WRF boundary files
+echo Listing WRF boundary files:
+ls wrfbdy_* wrflowinp_*
+read -p "Copy boundary files (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+        echo Yes
+        echo cp wrfbdy_* wrflowinp_* $RESULTSPATH
+        cp wrfbdy_* wrflowinp_* $RESULTSPATH
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
 
 # Copy WRF tables
 echo Listing tables:
@@ -108,19 +124,19 @@ case ${answer:0:1} in
 esac
 
 # Copy WRF tslist files
-echo Listing tslist files:
-ls tslist *.PH *.PR *.QV *.TH *.TS *.UU *.VV *.WW
-read -p "Copy tslist files (y/Enter)? " answer
-case ${answer:0:1} in
-    y|Y|"" )
-        echo Yes
-        echo cp tslist *.PH *.PR *.QV *.TH *.TS *.UU *.VV *.WW $RESULTSPATH
-        cp *.PH tslist *.PR *.QV *.TH *.TS *.UU *.VV *.WW $RESULTSPATH
-    ;;
-    * )
-        echo No
-    ;;
-esac
+# echo Listing tslist files:
+# ls tslist *.PH *.PR *.QV *.TH *.TS *.UU *.VV *.WW
+# read -p "Copy tslist files (y/Enter)? " answer
+# case ${answer:0:1} in
+#     y|Y|"" )
+#         echo Yes
+#         echo cp tslist *.PH *.PR *.QV *.TH *.TS *.UU *.VV *.WW $RESULTSPATH
+#         cp *.PH tslist *.PR *.QV *.TH *.TS *.UU *.VV *.WW $RESULTSPATH
+#     ;;
+#     * )
+#         echo No
+#     ;;
+# esac
 
 # Copy WPS log files
 echo Listing WPS log files:

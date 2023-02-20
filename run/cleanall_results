@@ -61,19 +61,19 @@ case ${answer:0:1} in
 esac
 
 # Remove tslist files
-echo Listing tslist files:
-ls *.PH *.PR *.QV *.TH *.TS *.UU *.VV *.WW
-read -p "Remove tslist files (y/Enter)? " answer
-case ${answer:0:1} in
-    y|Y|"" )
-        echo Yes
-        echo rm *.PH *.PR *.QV *.TH *.TS *.UU *.VV *.WW
-        rm *.PH *.PR *.QV *.TH *.TS *.UU *.VV *.WW
-    ;;
-    * )
-        echo No
-    ;;
-esac
+# echo Listing tslist files:
+# ls *.PH *.PR *.QV *.TH *.TS *.UU *.VV *.WW
+# read -p "Remove tslist files (y/Enter)? " answer
+# case ${answer:0:1} in
+#     y|Y|"" )
+#         echo Yes
+#         echo rm *.PH *.PR *.QV *.TH *.TS *.UU *.VV *.WW
+#         rm *.PH *.PR *.QV *.TH *.TS *.UU *.VV *.WW
+#     ;;
+#     * )
+#         echo No
+#     ;;
+# esac
 
 # Remove met_em files
 echo Listing met_em files:

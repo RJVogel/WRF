@@ -1,0 +1,26 @@
+#!/bin/bash
+
+NP=${1?Error: Number of processes for mpirun not given. Please append as number.}
+
+# Source libraries
+echo -----------------------
+echo sourcing libraries: source ./load_libraries
+source ./load_libraries
+
+# Copying/linking metgrid files into directory
+echo --------------------------
+echo linking metgrid files: ln -sf ../../WPS/met_em* .
+ln -sf ../../WPS/met_em* .
+# echo copying metgrid files: cp ../../WPS/met_em* .
+# cp ../../WPS/met_em* .
+
+# Run real
+echo ------------------------
+echo running real: mpirun -np $NP ./real.exe
+mpirun -np $NP ./real.exe
+
+# Run WRF
+echo ------------------------
+echo running wrf: mpirun -np $NP ./wrf.exe
+mpirun -np $NP ./wrf.exe
+
