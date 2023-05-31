@@ -13,24 +13,10 @@ source ./load_libraries
 
 # Copying/linking metgrid files into directory
 echo --------------------------
-echo Listing WPS metgrid files:
-ls ../../WPS/met_em* 
-read -p "Copy (c) or link (l) metgrid files? " answer
-case ${answer:0:2} in
-    c )
-        echo Copy
-        echo cp ../../WPS/met_em* .
-        cp ../../WPS/met_em* .
-    ;;
-    l )
-        echo Link
-        echo ln -sf ../../WPS/met_em* .
-        ln -sf ../../WPS/met_em* .
-    ;;
-    * )
-        echo None of the above
-    ;;
-esac
+echo linking metgrid files: ln -sf ../../WPS/met_em* .
+ln -sf ../../WPS/met_em* .
+# echo copying metgrid files: cp ../../WPS/met_em* .
+# cp ../../WPS/met_em* .
 
 # Run real
 echo ------------------------

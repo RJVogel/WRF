@@ -1,6 +1,10 @@
 #!/bin/bash
 
+# Input argument
 NP=${1?Error: Number of processes for mpirun not given. Please append as number.}
+
+# Run without hangup
+# (echo l | nohup ./runall_real 16) &
 
 # Source libraries
 echo -----------------------
