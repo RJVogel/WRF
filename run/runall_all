@@ -1,10 +1,8 @@
 #!/bin/bash
 
-# Input argument
-NP=${1?Error: Number of processes for mpirun not given. Please append as number.}
-
-# Run without hangup
-# (echo l | nohup ./runall_real 16) &
+# Input arguments
+WPS_PATH=${1?Error: WPS path not given. Please append as string.}
+NP=${2?Error: Number of processes for mpirun not given. Please append as number.}
 
 # Source libraries
 echo -----------------------
@@ -13,10 +11,8 @@ source ./load_libraries
 
 # Copying/linking metgrid files into directory
 echo --------------------------
-echo linking metgrid files: ln -sf ../../WPS/met_em* .
-ln -sf ../../WPS/met_em* .
-# echo copying metgrid files: cp ../../WPS/met_em* .
-# cp ../../WPS/met_em* .
+echo linking metgrid files: ln -sf $WPS_PATH/met_em* .
+ln -sf $WPS_PATH/met_em* .
 
 # Run real
 echo ------------------------

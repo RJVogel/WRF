@@ -3,6 +3,8 @@
 # Take path name as input argument
 RESULTSPATH=${1?Error: no path given! Please specify path, where files should be copied.}
 
+WPS_PATH=/opt/ARW/WPS2
+
 # Create directory
 echo Directory is $RESULTSPATH
 read -p "Create directory (y/Enter)? " answer
@@ -140,13 +142,13 @@ esac
 
 # Copy WPS log files
 echo Listing WPS log files:
-ls ../../WPS/log.geogrid ../../WPS/log.ungrib ../../WPS/log.metgrid
+ls $WPS_PATH/log.geogrid $WPS_PATH/log.ungrib $WPS_PATH/log.metgrid
 read -p "Copy log files (y/Enter)? " answer
 case ${answer:0:1} in
     y|Y|"" )
         echo Yes
-        echo cp ../../WPS/log.geogrid ../../WPS/log.ungrib ../../WPS/log.metgrid $RESULTSPATH
-	cp ../../WPS/log.geogrid ../../WPS/log.ungrib ../../WPS/log.metgrid $RESULTSPATH
+        echo cp $WPS_PATH/log.geogrid $WPS_PATH/log.ungrib $WPS_PATH/log.metgrid $RESULTSPATH
+	cp $WPS_PATH/log.geogrid $WPS_PATH/log.ungrib $WPS_PATH/log.metgrid $RESULTSPATH
     ;;
     * )
         echo No
@@ -155,13 +157,13 @@ esac
 
 # Copy WPS Tables
 echo Listing tables:
-ls ../../WPS/geogrid/GEOGRID.TBL ../../WPS/metgrid/METGRID.TBL ../../WPS/Vtable
+ls $WPS_PATH/geogrid/GEOGRID.TBL $WPS_PATH/metgrid/METGRID.TBL $WPS_PATH/Vtable
 read -p "Copy tables (y/Enter)? " answer
 case ${answer:0:1} in
     y|Y|"" )
         echo Yes
-        echo cp ../../WPS/geogrid/GEOGRID.TBL ../../WPS/metgrid/METGRID.TBL ../../WPS/Vtable $RESULTSPATH
-        cp ../../WPS/geogrid/GEOGRID.TBL ../../WPS/metgrid/METGRID.TBL ../../WPS/Vtable $RESULTSPATH
+        echo cp $WPS_PATH/geogrid/GEOGRID.TBL $WPS_PATH/metgrid/METGRID.TBL $WPS_PATH/Vtable $RESULTSPATH
+        cp $WPS_PATH/geogrid/GEOGRID.TBL $WPS_PATH/metgrid/METGRID.TBL $WPS_PATH/Vtable $RESULTSPATH
     ;;
     * )
         echo No
@@ -170,13 +172,13 @@ esac
 
 # Copy WPS namelist files
 echo Listing namelist files:
-ls ../../WPS/namelist.wps
+ls $WPS_PATH/namelist.wps
 read -p "Copy namelist files (y/Enter)? " answer
 case ${answer:0:1} in
     y|Y|"" )
         echo Yes
-        echo ../../WPS/cp namelist.wps $RESULTSPATH
-        cp ../../WPS/namelist.wps $RESULTSPATH
+        echo $WPS_PATH/cp namelist.wps $RESULTSPATH
+        cp $WPS_PATH/namelist.wps $RESULTSPATH
     ;;
     * )
         echo No
@@ -185,13 +187,13 @@ esac
 
 # Copy WPS geo_em files
 echo Listing geo_em files:
-ls ../../WPS/geo_em*
+ls $WPS_PATH/geo_em*
 read -p "Copy geo_em files (y/Enter)? " answer
 case ${answer:0:1} in
     y|Y|"" )
         echo Yes
-        echo ../../WPS/cp geo_em* $RESULTSPATH
-        cp ../../WPS/geo_em* $RESULTSPATH
+        echo $WPS_PATH/cp geo_em* $RESULTSPATH
+        cp $WPS_PATH/geo_em* $RESULTSPATH
     ;;
     * )
         echo No
