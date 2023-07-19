@@ -183,7 +183,7 @@ if [ -n "$NETCDFPAR" ] ; then
       PROBS=TRUE
     fi
   fi
-  if [ "$PROBS" == "TRUE" ] ; then
+  if [ "$PROBS" = "TRUE" ] ; then
     echo
     echo Cannot activate NETCDFPAR with this version of NetCDF: $ncversion
     echo You need NetCDF version 4.7.4 or newer
@@ -278,15 +278,15 @@ if [ -n "$NETCDF4" ] ; then
     if [ -f $NETCDF/bin/nf-config ] ; then
       nx_config="$NETCDF/bin/nf-config --flibs"
       DEP_LIB_PATH="`$nx_config | awk '{for(i=1;i<=NF;i++){if(match($i, /-L.*/)) {print $i} } }'`"
-      CURL="`$nx_config | awk '{for(i=1;i<=NF;i++){if($i == "-lcurl") {print $i} } }'`"
-      GPFS="`$nx_config | awk '{for(i=1;i<=NF;i++){if($i == "-lgpfs") {print $i} } }'`"
+      CURL="`$nx_config | awk '{for(i=1;i<=NF;i++){if($i = "-lcurl") {print $i} } }'`"
+      GPFS="`$nx_config | awk '{for(i=1;i<=NF;i++){if($i = "-lgpfs") {print $i} } }'`"
     fi
     if [ "$DEP_LIB_PATH" = '' ] ; then
       if [ -f $NETCDF/bin/nc-config ] ; then
         nx_config="$NETCDF/bin/nc-config --libs"
         DEP_LIB_PATH="`$nx_config | awk '{for(i=1;i<=NF;i++){if(match($i, /-L.*/)) {print $i} } }'`"
-        CURL="`$nx_config | awk '{for(i=1;i<=NF;i++){if($i == "-lcurl") {print $i} } }'`"
-        GPFS="`$nx_config | awk '{for(i=1;i<=NF;i++){if($i == "-lgpfs") {print $i} } }'`"
+        CURL="`$nx_config | awk '{for(i=1;i<=NF;i++){if($i = "-lcurl") {print $i} } }'`"
+        GPFS="`$nx_config | awk '{for(i=1;i<=NF;i++){if($i = "-lgpfs") {print $i} } }'`"
         if [ "$CURL" != '' -a  "$CURL_PATH" = '' ] ; then
            CURL_PATH="DEFAULT"
         fi
@@ -315,7 +315,7 @@ if [ -n "$NETCDF4" ] ; then
       n=`echo $buff | wc -w`
       lastword=`echo "$buff" | cut -d' ' -f$n | sed 's/\/$//'`
       c="`echo $lastword | cut -c1`"
-      if [ "$c" == "/" ] ; then
+      if [ "$c" = "/" ] ; then
          NETCDF=$lastword
       else
         c="`echo $lastword | cut -c1-2`"
@@ -916,7 +916,7 @@ EOF
         echo "NetCDF version: ${ncversion}"
         echo "Enabled NetCDF-4/HDF-5: `nc-config --has-nc4`"
         echo "NetCDF built with PnetCDF: `nc-config --has-pnetcdf`"
-        if [ "$USENETCDFPAR" == "1" ] ; then
+        if [ "$USENETCDFPAR" = "1" ] ; then
           echo "Using parallel NetCDF via NETCDFPAR option"
         fi
         echo " "
