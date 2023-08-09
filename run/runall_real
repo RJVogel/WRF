@@ -9,6 +9,9 @@ echo -----------------------
 echo sourcing libraries: source ./load_libraries
 source ./load_libraries
 
+# Setting namelist
+ln -sf namelist.input.pytools namelist.input
+
 # Copying/linking metgrid files into directory
 echo --------------------------
 echo linking metgrid files: ln -sf $WPS_PATH/met_em* .
