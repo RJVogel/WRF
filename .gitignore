@@ -21,4 +21,9 @@ met_em*
 rsl.*
 log.*
 run/archive/*
-run/namelist.input.pytools
+run/namelist.input.pytools*
+wrfrst*
+wrfout*
+wrfbdy*
+wrfinput*
+wrflowinp*
