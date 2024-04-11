@@ -14,8 +14,7 @@
 *.o
 *.mod
 *.a
-configure.wrf*
-*.backup
+configure.wrf
 *.f90
 met_em*
 rsl.*
