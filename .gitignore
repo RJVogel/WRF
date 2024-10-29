@@ -16,13 +16,32 @@
 *.a
 configure.wrf
 *.f90
+
+# Out-of-source build locations
+_build*
+wrf_config.cmake
+
+# Executables when not featuring .exe suffix
+ndown
+real
+tc
+ideal
+wrf
+
+# Model inputs/outputs
+wrfbdy_d*
+wrfinput_d*
+wrfout_d*
+*.nc
+rsl.out.*
+rsl.error.*
+*.log
+
+# Custom addition
 met_em*
-rsl.*
 log.*
 run/archive/*
 run/namelist.input.pytools*
 wrfrst*
-wrfout*
-wrfbdy*
-wrfinput*
 wrflowinp*
+
