@@ -2994,6 +2994,8 @@ ENDIF
       IF(IVGTYP(I,J) .GT. 30)THEN
         write(mesg,*) 'Sample of Urban settings'
         WRITE_MESSAGE(mesg)
+        write(mesg,*) 'HGT_URB2D',HGT_URB2D(I,J)
+        WRITE_MESSAGE(mesg)
         write(mesg,*) 'TSURFACE0_URB',TSURFACE0_URB(I,J)
         WRITE_MESSAGE(mesg)
         write(mesg,*) 'TDEEP0_URB', TDEEP0_URB(I,J)
