@@ -543,6 +543,18 @@ integer::oops1,oops2
                grid%snowh(i,j) = grid%snow(i,j) / 1000. * 5.
             END DO
          END DO
+      
+      ELSE
+         DO j=jts,MIN(jde-1,jte)
+            DO i=its,MIN(ide-1,ite)
+               IF ( skip_middle_points_t ( ids , ide , jds , jde , i , j , em_width , hold_ups ) ) CYCLE
+               IF ( grid%snow(i,j) .EQ. 0. ) THEN
+                  grid%snowh(i,j) = 0.
+               ELSE IF ( grid%snowh(i,j) .EQ. 0. ) THEN
+                  grid%snowh(i,j) = grid%snow(i,j) / 1000. * 5.
+               END IF
+            END DO
+         END DO
 
       END IF
 
@@ -3102,8 +3114,8 @@ integer::oops1,oops2
 
               IF ( grid%FRC_URB2D(i,j) == 0. ) THEN
                  IF ( (MMINLU == 'NLCD40' .OR. MMINLU == 'MODIFIED_IGBP_MODIS_NOAH') .AND. &
-                   (grid%ivgtyp(i,j)==24 .OR. grid%ivgtyp(i,j)==25 .OR. grid%ivgtyp(i,j)==26 .OR. grid%ivgtyp(i,j)==13 .OR. grid%ivgtyp(i,j).GT.30) ) grid%FRC_URB2D(i,j) = 0.9
-                 IF ( MMINLU == 'USGS' .AND. grid%ivgtyp(i,j)==1 .OR. grid%ivgtyp(i,j).GT.30) grid%FRC_URB2D(i,j) = 0.9
+                   (grid%ivgtyp(i,j)==24 .OR. grid%ivgtyp(i,j)==25 .OR. grid%ivgtyp(i,j)==26 .OR. grid%ivgtyp(i,j)==13 .OR. grid%ivgtyp(i,j).GT.30) ) grid%FRC_URB2D(i,j) = 0.5
+                 IF ( MMINLU == 'USGS' .AND. grid%ivgtyp(i,j)==1 .OR. grid%ivgtyp(i,j).GT.30) grid%FRC_URB2D(i,j) = 0.5
               ENDIF
                IF ( skip_middle_points_t ( ids , ide , jds , jde , i , j , em_width , hold_ups ) ) CYCLE 
                grid%LP_URB2D(i,j)  = grid%URB_PARAM(i,91,j)
@@ -3130,6 +3142,17 @@ integer::oops1,oops2
             IF ( config_flags%sf_urban_physics==1 ) THEN
                grid%MH_URB2D(i,j)  = grid%URB_PARAM(i,92,j)
                grid%STDH_URB2D(i,j)  = grid%URB_PARAM(i,93,j)
+            ENDIF
+         END DO
+      END DO
+
+      ! Limit building height to 25.0 m for SLUCM
+      DO j = jts , MIN(jde-1,jte)
+         DO i = its , MIN(ide-1,ite)
+            IF ( skip_middle_points_t ( ids , ide , jds , jde , i , j , em_width , hold_ups ) ) CYCLE
+            IF ( config_flags%sf_urban_physics==1 ) THEN
+               IF ( grid%MH_URB2D(i,j) .GT. 25.0 ) grid%MH_URB2D(i,j) = 25.0
+               IF ( grid%HGT_URB2D(i,j) .GT. 25.0 ) grid%HGT_URB2D(i,j) = 25.0
             ENDIF
          END DO
       END DO
