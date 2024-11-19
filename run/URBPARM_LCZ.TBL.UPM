@@ -20,7 +20,7 @@ Number of urban categories: 11
 # ZR:  Roof level (building height)  [ m ]
 #      (sf_urban_physics=1)
 
-ZR: 37.5, 17.5, 6.5, 37.5, 17.5, 6.5, 3.0, 6.5, 6.5, 10.0, 1.0
+ZR: 25.0, 17.5, 6.5, 25.0, 17.5, 6.5, 3.0, 6.5, 6.5, 10.0, 1.0  # Height limited to 25 m instead of 37.5 m for LCZ 1 and 4
 
 #
 # SIGMA_ZED:  Standard Deviation of roof height  [ m ]
