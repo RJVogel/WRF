@@ -2790,7 +2790,7 @@ ENDIF
 
             IF (SWITCH_URB == 1) THEN
                UTYPE_URB = UTYPE_URB2D(I,J)  ! for default. high-intensity
-               IF (HGT_URB2D(I,J)>0.) THEN
+               IF (HGT_URB2D(I,J)>0. .and. LP_URB2D(I,J)>0. .and. LB_URB2D(I,J)>0. .and. MH_URB2D(I,J)>0. .and. STDH_URB2D(I,J)>0. .and. LF_URB2D(I,1,J)>0.) THEN
                   CONTINUE
                ELSE
                   WRITE(mesg,*) 'USING DEFAULT URBAN MORPHOLOGY'
