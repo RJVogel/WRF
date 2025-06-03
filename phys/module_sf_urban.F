@@ -823,6 +823,10 @@ USE module_model_constants, ONLY :  piconst
    END IF
 
    IF( ZDC+Z0C+2. >= ZA) THEN
+    write(mesg,*) 'ZDC + Z0C + 2m:', ZDC+Z0C+2.
+    WRITE_MESSAGE(mesg)
+    write(mesg,*) 'ZA:', ZA
+    WRITE_MESSAGE(mesg)
     FATAL_ERROR("ZDC + Z0C + 2m is larger than the 1st WRF level - Stop in subroutine urban - change ZDC and Z0C" ) 
    END IF
 
@@ -2786,7 +2790,7 @@ ENDIF
 
             IF (SWITCH_URB == 1) THEN
                UTYPE_URB = UTYPE_URB2D(I,J)  ! for default. high-intensity
-               IF (HGT_URB2D(I,J)>0.) THEN
+               IF (HGT_URB2D(I,J)>0. .and. LP_URB2D(I,J)>0. .and. LB_URB2D(I,J)>0. .and. MH_URB2D(I,J)>0. .and. STDH_URB2D(I,J)>0. .and. LF_URB2D(I,1,J)>0.) THEN
                   CONTINUE
                ELSE
                   WRITE(mesg,*) 'USING DEFAULT URBAN MORPHOLOGY'
@@ -2991,8 +2995,10 @@ ENDIF
 
 
       IF (CHECK.EQ.0)THEN
-      IF(IVGTYP(I,J).EQ.1)THEN
+      IF(IVGTYP(I,J) .GT. 30)THEN
         write(mesg,*) 'Sample of Urban settings'
+        WRITE_MESSAGE(mesg)
+        write(mesg,*) 'HGT_URB2D',HGT_URB2D(I,J)
         WRITE_MESSAGE(mesg)
         write(mesg,*) 'TSURFACE0_URB',TSURFACE0_URB(I,J)
         WRITE_MESSAGE(mesg)

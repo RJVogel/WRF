@@ -14,8 +14,7 @@
 *.o
 *.mod
 *.a
-configure.wrf*
-*.backup
+configure.wrf
 *.f90
 
 # Out-of-source build locations
@@ -37,3 +36,12 @@ wrfout_d*
 rsl.out.*
 rsl.error.*
 *.log
+
+# Custom addition
+met_em*
+log.*
+run/archive/*
+run/namelist.input.pytools*
+wrfrst*
+wrflowinp*
+

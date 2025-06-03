@@ -1,0 +1,202 @@
+#!/bin/bash
+
+# Take path name as input argument
+RESULTSPATH=${1?Error: no path given! Please specify path, where files should be copied.}
+
+WPS_PATH=/opt/ARW/WPS
+
+# Create directory
+echo Directory is $RESULTSPATH
+read -p "Create directory (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+        echo Yes
+        echo mkdir -p $RESULTSPATH
+	mkdir -p $RESULTSPATH
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
+# Copy WRF output files
+echo Listing WRF output files:
+ls wrfout_* 
+read -p "Copy output files (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+        echo Yes
+        echo cp wrfout_* $RESULTSPATH
+        cp wrfout_* $RESULTSPATH
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
+# Copy WRF restart files
+echo Listing WRF restart files:
+ls wrfrst_*
+read -p "Copy restart files (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+	echo Yes
+	echo cp wrfrst_* $RESULTSPATH
+	cp wrfrst_* $RESULTSPATH
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
+# Copy WRF log files
+echo Listing WRF log files:
+ls rsl.*
+read -p "Copy log files (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+        echo Yes
+        echo cp rsl.* $RESULTSPATH
+	cp rsl.* $RESULTSPATH
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
+# Copy WRF input files
+echo Listing WRF input files:
+ls wrfinput_*
+read -p "Copy input files (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+        echo Yes
+        echo cp wrfinput_* $RESULTSPATH
+        cp wrfinput_* $RESULTSPATH
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
+# Copy WRF boundary files
+echo Listing WRF boundary files:
+ls wrfbdy_* wrflowinp_*
+read -p "Copy boundary files (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+        echo Yes
+        echo cp wrfbdy_* wrflowinp_* $RESULTSPATH
+        cp wrfbdy_* wrflowinp_* $RESULTSPATH
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
+
+# Copy WRF tables
+echo Listing tables:
+ls GENPARM.TBL SOILPARM.TBL VEGPARM.TBL LANDUSE.TBL MPTABLE.TBL URBPARM.TBL
+read -p "Copy tables (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+        echo Yes
+        echo cp GENPARM.TBL SOILPARM.TBL VEGPARM.TBL LANDUSE.TBL MPTABLE.TBL URBPARM.TBL URBPARM_LCZ.TBL $RESULTSPATH
+        cp GENPARM.TBL SOILPARM.TBL VEGPARM.TBL LANDUSE.TBL MPTABLE.TBL URBPARM.TBL URBPARM_LCZ.TBL $RESULTSPATH
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
+# Copy WRF namelist files
+echo Listing namelist files:
+ls namelist.input
+read -p "Copy namelist files (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+        echo Yes
+        echo cp namelist.input $RESULTSPATH
+        cp namelist.input $RESULTSPATH
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
+# Copy WRF tslist files
+# echo Listing tslist files:
+# ls tslist *.PH *.PR *.QV *.TH *.TS *.UU *.VV *.WW
+# read -p "Copy tslist files (y/Enter)? " answer
+# case ${answer:0:1} in
+#     y|Y|"" )
+#         echo Yes
+#         echo cp tslist *.PH *.PR *.QV *.TH *.TS *.UU *.VV *.WW $RESULTSPATH
+#         cp *.PH tslist *.PR *.QV *.TH *.TS *.UU *.VV *.WW $RESULTSPATH
+#     ;;
+#     * )
+#         echo No
+#     ;;
+# esac
+
+# Copy WPS log files
+echo Listing WPS log files:
+ls $WPS_PATH/log.geogrid $WPS_PATH/log.ungrib $WPS_PATH/log.metgrid
+read -p "Copy log files (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+        echo Yes
+        echo cp $WPS_PATH/log.geogrid $WPS_PATH/log.ungrib $WPS_PATH/log.metgrid $RESULTSPATH
+	cp $WPS_PATH/log.geogrid $WPS_PATH/log.ungrib $WPS_PATH/log.metgrid $RESULTSPATH
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
+# Copy WPS Tables
+echo Listing tables:
+ls $WPS_PATH/geogrid/GEOGRID.TBL $WPS_PATH/metgrid/METGRID.TBL $WPS_PATH/Vtable
+read -p "Copy tables (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+        echo Yes
+        echo cp $WPS_PATH/geogrid/GEOGRID.TBL $WPS_PATH/metgrid/METGRID.TBL $WPS_PATH/Vtable $RESULTSPATH
+        cp $WPS_PATH/geogrid/GEOGRID.TBL $WPS_PATH/metgrid/METGRID.TBL $WPS_PATH/Vtable $RESULTSPATH
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
+# Copy WPS namelist files
+echo Listing namelist files:
+ls $WPS_PATH/namelist.wps
+read -p "Copy namelist files (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+        echo Yes
+        echo $WPS_PATH/cp namelist.wps $RESULTSPATH
+        cp $WPS_PATH/namelist.wps $RESULTSPATH
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
+# Copy WPS geo_em files
+echo Listing geo_em files:
+ls $WPS_PATH/geo_em*
+read -p "Copy geo_em files (y/Enter)? " answer
+case ${answer:0:1} in
+    y|Y|"" )
+        echo Yes
+        echo $WPS_PATH/cp geo_em* $RESULTSPATH
+        cp $WPS_PATH/geo_em* $RESULTSPATH
+    ;;
+    * )
+        echo No
+    ;;
+esac
+
