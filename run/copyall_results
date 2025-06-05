@@ -3,7 +3,9 @@
 # Take path name as input argument
 RESULTSPATH=${1?Error: no path given! Please specify path, where files should be copied.}
 
-WPS_PATH=/opt/ARW/WPS
+read -p "Specify WPS folder (e.g. WPS) " WPS_FOLDER
+
+WPS_PATH=/opt/ARW/$WPS_FOLDER
 
 # Create directory
 echo Directory is $RESULTSPATH
