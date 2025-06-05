@@ -1,0 +1,14 @@
+#!/bin/bash
+
+NP=${1?Error: Number of processes for mpirun not given. Please append as number.}
+
+# Source libraries
+echo -----------------------
+echo sourcing libraries: source ./load_libraries
+source ./load_libraries
+
+# Run WRF
+echo ------------------------
+echo running wrf: mpirun -np $NP ./wrf.exe
+mpirun -np $NP ./wrf.exe
+
