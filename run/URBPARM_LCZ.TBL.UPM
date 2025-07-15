@@ -179,7 +179,7 @@ OASIS: 1.0
 #            [2: Water-holding scheme over impervious surface, Yang et al., 2014
 #      (sf_urban_physics=1)
 
-IMP_SCHEME: 2
+IMP_SCHEME: 1
 
 # Porosity of pavement materials on impervious surface
 # For calculating latent heat flux over impervious surface
@@ -481,7 +481,7 @@ GR_FLAG:0
 #      (sf_urban_physics=3)
 #
 
-GR_TYPE: 1
+GR_TYPE: 2
 
 #
 # GR_FRAC_ROOF: fraction of green roof over the roof (0:1)
