@@ -683,18 +683,20 @@ USE module_model_constants, ONLY :  piconst
   !WRITE_MESSAGE(mesg)
  
  !Calculate Building Width and Street Width Based on BEP formulation
- if(lb_urb.gt.lp_urb)THEN
+ if(lb_urb.gt.lp_urb.and.frc_urb.gt.lp_urb)THEN
   BW=2.*hgt_urb*lp_urb/(lb_urb-lp_urb)
   SW=2.*hgt_urb*lp_urb*((frc_urb/lp_urb)-1.)/(lb_urb-lp_urb)
-  !write(mesg,*) 'Building Width',BW
-  !WRITE_MESSAGE(mesg)
-  !write(mesg,*) 'Street Width',SW
-  !WRITE_MESSAGE(mesg)
- elseif (SW.lt.0.0.or.BW.lt.0.0)then
-  BW=BUILDING_WIDTH(1)
-  SW=STREET_WIDTH(1)
+  BW = MIN(BW, 100.)
+  SW = MIN(SW, 200.)
+ ! write(mesg,*) 'Building Width',BW
+ ! WRITE_MESSAGE(mesg)
+ ! write(mesg,*) 'Street Width',SW
+ ! WRITE_MESSAGE(mesg)
+ ! elseif (SW.lt.0.0.or.BW.lt.0.0)then
+ ! BW=BUILDING_WIDTH(1)
+ ! SW=STREET_WIDTH(1)
  else
-    BW=BUILDING_WIDTH(1)
+  BW=BUILDING_WIDTH(1)
   SW=STREET_WIDTH(1)
  end if
  
@@ -706,7 +708,7 @@ USE module_model_constants, ONLY :  piconst
    SIGMA_ZED = stdh_urb
 
  !Calculate Wind Direction and Assign Appropriae lf_urb
-   WDR = (180.0/PI)*ATAN2(U10,V10)
+   WDR = (180.0/PI)*ATAN2(U1,V1)
    
    IF(WDR.ge.0.0.and.WDR.lt.22.5)THEN
      lambda_f = lf_urb(1)
