@@ -1420,7 +1420,7 @@ CONTAINS
             frc_urb = frc_urb2d(I,J)
             lb_urb = lb_urb2d(I,J)
             check = 0
-            if (I.eq.73.and.J.eq.125)THEN
+            if (I.eq.73.and.J.eq.77)THEN
                check = 1
             end if
 ! Distributed aerodynamics

@@ -20,7 +20,7 @@ Number of urban categories: 11
 # ZR:  Roof level (building height)  [ m ]
 #      (sf_urban_physics=1)
 
-ZR: 25.0, 17.5, 6.5, 25.0, 17.5, 6.5, 3.0, 6.5, 6.5, 10.0, 1.0  # Height limited to 25 m instead of 37.5 m for LCZ 1 and 4
+ZR: 30.0, 17.5, 6.5, 30.0, 17.5, 6.5, 3.0, 6.5, 6.5, 10.0, 1.0  # capped class 1 and 4 to 30 m for SLUCM
 
 #
 # SIGMA_ZED:  Standard Deviation of roof height  [ m ]
@@ -179,7 +179,7 @@ OASIS: 1.0
 #            [2: Water-holding scheme over impervious surface, Yang et al., 2014
 #      (sf_urban_physics=1)
 
-IMP_SCHEME: 2
+IMP_SCHEME: 1
 
 # Porosity of pavement materials on impervious surface
 # For calculating latent heat flux over impervious surface
@@ -481,7 +481,7 @@ GR_FLAG:0
 #      (sf_urban_physics=3)
 #
 
-GR_TYPE: 1
+GR_TYPE: 2
 
 #
 # GR_FRAC_ROOF: fraction of green roof over the roof (0:1)
