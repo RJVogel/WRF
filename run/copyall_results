@@ -23,13 +23,13 @@ esac
 
 # Copy WRF output files
 echo Listing WRF output files:
-ls wrfout_* 
+ls wrfout_* wrfxtrm_*
 read -p "Copy output files (y/Enter)? " answer
 case ${answer:0:1} in
     y|Y|"" )
         echo Yes
-        echo cp wrfout_* $RESULTSPATH
-        cp wrfout_* $RESULTSPATH
+        echo cp wrfout_* wrfxtrm_* $RESULTSPATH
+        cp wrfout_* wrfxtrm_* $RESULTSPATH
     ;;
     * )
         echo No
