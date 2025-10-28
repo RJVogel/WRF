@@ -683,11 +683,13 @@ USE module_model_constants, ONLY :  piconst
   !WRITE_MESSAGE(mesg)
  
  !Calculate Building Width and Street Width Based on BEP formulation
- if(lb_urb.gt.lp_urb.and.frc_urb.gt.lp_urb)THEN
-  BW=2.*hgt_urb*lp_urb/(lb_urb-lp_urb)
-  SW=2.*hgt_urb*lp_urb*((frc_urb/lp_urb)-1.)/(lb_urb-lp_urb)
-  BW = MIN(BW, 100.)
-  SW = MIN(SW, 200.)
+ !if(lb_urb.gt.lp_urb.and.frc_urb.gt.lp_urb)THEN
+ ! BW=2.*hgt_urb*lp_urb/(lb_urb-lp_urb)
+ ! SW=2.*hgt_urb*lp_urb*((frc_urb/lp_urb)-1.)/(lb_urb-lp_urb)
+ ! BW = MIN(BW, 100.)
+ ! SW = MIN(SW, 200.)
+ ! BW = MAX(BW, 5.)
+ ! SW = MAX(SW, 2.)
  ! write(mesg,*) 'Building Width',BW
  ! WRITE_MESSAGE(mesg)
  ! write(mesg,*) 'Street Width',SW
@@ -695,16 +697,16 @@ USE module_model_constants, ONLY :  piconst
  ! elseif (SW.lt.0.0.or.BW.lt.0.0)then
  ! BW=BUILDING_WIDTH(1)
  ! SW=STREET_WIDTH(1)
- else
-  BW=BUILDING_WIDTH(1)
-  SW=STREET_WIDTH(1)
- end if
+ !else
+ ! BW=BUILDING_WIDTH(1)
+ ! SW=STREET_WIDTH(1)
+ !end if
  
  !Assign NUDAPT Parameters
    ZR = mh_urb
     R = lp_urb
     RW = 1.0-R
-   HGT = mh_urb/(BW+SW)
+  ! HGT = mh_urb/(BW+SW)
    SIGMA_ZED = stdh_urb
 
  !Calculate Wind Direction and Assign Appropriae lf_urb
@@ -733,6 +735,17 @@ USE module_model_constants, ONLY :  piconst
    ELSE
      lambda_f = lf_urb(1)
    ENDIF
+
+  ! New BW and SW formulation based on lambda_f and lambda_p for cuboids (Kanda et al. 2005)
+  BW = hgt_urb * lp_urb / lambda_f
+  SW = BW * (1.0 / sqrt(lp_urb) - 1.0)
+  BW = MIN(BW, 100.)
+  BW = MAX(BW, 5.)
+  SW = MIN(SW, 200.)
+  SW = MAX(SW, 2.)
+
+  ! Calculate normalized mean height from BW and SW
+  HGT = mh_urb / (BW + SW)
 
   !Calculate the following urban canyon geometry parameters following Macdonald's (1998) formulations
       Cd         = 1.2
