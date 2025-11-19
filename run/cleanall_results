@@ -2,13 +2,13 @@
 
 # Remove Output files
 echo Listing WRF output files:
-ls wrfout_* 
+ls wrfout_* wrfxtrm_*
 read -p "Remove output files (y/Enter)? " answer
 case ${answer:0:1} in
     y|Y|"" )
         echo Yes
-        echo rm wrfout_*
-        rm wrfout_*
+        echo rm wrfout_* wrfxtrm_*
+        rm wrfout_* wrfxtrm_*
     ;;
     * )
         echo No
