@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Input arguments
 NP=${1?Error: Number of processes for mpirun not given. Please append as number.}
 
 # Source libraries
@@ -12,6 +13,9 @@ ln -sf namelist.input.pytools namelist.input
 
 # Run WRF
 echo ------------------------
-echo running wrf: mpirun -np $NP ./wrf.exe
-mpirun -np $NP ./wrf.exe
-
+echo running wrf:
+export OMP_NUM_THREADS=1
+cmd=(mpirun -np "$NP" -ppn "$NP" -bind-to core -map-by socket ./wrf.exe)
+printf '%q ' "${cmd[@]}"
+echo
+"${cmd[@]}"

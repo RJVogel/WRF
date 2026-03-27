@@ -19,6 +19,9 @@ ln -sf $WPS_PATH/met_em* .
 
 # Run real
 echo ------------------------
-echo running real: mpirun -np $NP ./real.exe
-mpirun -np $NP ./real.exe
-
+echo running real:
+export OMP_NUM_THREADS=1
+cmd=(mpirun -np "$NP" -ppn "$NP" -bind-to core -map-by socket ./real.exe)
+printf '%q ' "${cmd[@]}"
+echo
+"${cmd[@]}"
